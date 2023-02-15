@@ -1,0 +1,23 @@
+Nav {
+    height: 100px;
+}
+
+.buttons {
+ border: none;
+}
+
+#logo {
+    height: 55px;
+    width: fit-content;
+}
+
+#popoverButton {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    width: 280px;
+    background: #2c475c;
+}
+
