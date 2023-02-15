@@ -7,10 +7,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className=' overflow-hidden'>
             <Navbar />
-            <div className='body container-fluid vh-100'>
-                hoi
+            <div className='body container-fluid'>
+                Sorry
             </div>
         </div>
     );

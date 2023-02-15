@@ -1,5 +1,10 @@
 .body {
     background-color: #2c475c;
-
+    height: 89vh;
     color: white;
 }
+
+.overflow-hidden {
+    overflow: hidden;
+  }
+  

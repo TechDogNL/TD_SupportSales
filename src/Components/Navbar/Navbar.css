@@ -1,5 +1,5 @@
 Nav {
-    height: 100px;
+    height: 11vh;
 }
 
 .buttons {
@@ -16,8 +16,26 @@ Nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
     font-size: xx-large;
     width: 280px;
+    border-color: #2c475c;
+    border-style: solid;
+    border-radius: 13px;
     background: #2c475c;
+}
+
+.MonthPicker {
+    width: 250px !important;
+}
+
+.MonthShow {
+    border-color: #2c475c;
+    border-style: solid;
+    border-radius: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+    font-size: xx-large;
 }
 

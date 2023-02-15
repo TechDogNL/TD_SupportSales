@@ -19,31 +19,34 @@ const Navbar = () => {
   const now = dayjs().locale('nl').format();
   const [date, setDate] = useState(dayjs(now).locale('nl'));
   console.log(capitalize(date.format('MMMM')))
-  console.log(date.year())
   console.log(date.add(-1, 'year'))
+  console.log(date.year())
   const [popoverOpen, setPopoverOpen] = useState(false);
 
     return (
         <div>
             <nav className="navbar navbar-light bg-light">
-                <div className="container-fluid d-flex justify-content-center ">
+                <div className="container-fluid d-flex justify-content-center p-0 ">
                     <div className='col-3'>
-
                     </div>
                     <div className='col-6 d-flex justify-content-center'>
                         <img src={logo} id='logo' className="img-fluid" alt=""></img>
                     </div>
-                    <div className='col-3'>
-                    <Button type="button"  color="secondary" id="popoverButton" data-bs-toggle="popover" title="Popup title" data-bs-content="Popup content" onClick={e => setPopoverOpen(!popoverOpen)}>
+                    <div className='col-3 d-flex justify-content-end pt-2'>
+                    <Button type="button"  color="secondary" id="popoverButton" data-bs-toggle="popover" data-bs-content="Popup content" onClick={e => setPopoverOpen(!popoverOpen)}>
                       Selecteer datum
                     </Button>
                     <Popover placement="bottom" isOpen={popoverOpen} target="popoverButton" toggle={e => setPopoverOpen(!popoverOpen)}>
                       <PopoverBody className='ps-2'>
+                        <p>{date.year()}</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <MonthPicker className='MonthPicker' date={date} onChange={(newDate) => setDate(newDate.locale('nl'))} />
                         </LocalizationProvider>
                       </PopoverBody>
                     </Popover>
+                    <div>
+                      <p className='MonthShow rounded-2 py-1 border-4'>{date.format('MMM').toUpperCase()}</p>
+                    </div>
                     </div>
                 </div>
             </nav>
