@@ -7,7 +7,7 @@ Nav {
 }
 
 #logo {
-    height: 55px;
+    height: 7vh;
     width: fit-content;
 }
 
@@ -18,7 +18,7 @@ Nav {
     justify-content: center;
     margin-right: 20px;
     font-size: xx-large;
-    width: 280px;
+    width: fit-content;
     border-color: #2c475c;
     border-style: solid;
     border-radius: 13px;
