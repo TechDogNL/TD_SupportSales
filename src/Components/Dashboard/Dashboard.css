@@ -31,4 +31,8 @@
   border-radius: 1.75rem;
   flex-grow: 1;
 }
+.reactSpeed {
+  width: 150px !important;
+  height: 150px !important;
+}
 

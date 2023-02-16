@@ -1,11 +1,13 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
+import ReactSpeedometer from "react-d3-speedometer"
 import './Dashboard.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 const Dashboard = () => {
+    const textColor = '#f8f9fa'
     return (
     <div className='body'>
         <Navbar />
@@ -52,7 +54,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className='d-flex flex-column col-5 ps-3 pe-3 pb-4 pt-4'>
+            <div className='d-flex flex-column col-4 ps-3 pe-3 pb-4 pt-4'>
                 <div className='bigBoxes'>
                     <div className='h-100'>
                         <h1>Sorry</h1>
@@ -61,7 +63,7 @@ const Dashboard = () => {
                 <div className='bigBoxes'>
                     <div className='p-4 h-100'>
                         <div className='mb-3 ps-3'>
-                            <h3 className=''>Ranglijst</h3>
+                            <h3>Ranglijst</h3>
                         </div>
                         <div className='row ps-3'>
                             <div className='col-6'>
@@ -82,9 +84,28 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className='d-flex flex-column col-4 ps-3 pe-3 pb-4 pt-4'>
+            <div className='d-flex flex-column col-5 ps-3 pe-3 pb-4 pt-4'>
                 <div className='midBoxes'>
-                    <h1>Sorry</h1>
+                    <div className=' d-flex p-4 justify-content-between'>
+                        <div className='mb-3'>
+                            <h4>Bonus</h4>
+                        </div>
+                        <div>
+                            <ReactSpeedometer
+                                className='reactSpeed'
+                                minValue={0}
+                                maxValue={100}
+                                needleHeightRatio={0.7}
+                                segments={7}
+                                needleColor={'black'}
+                                labelFontSize={'0'}
+                                segmentColors={['#67b7dc', '#6794dc', '#6771dc', '#8067dc', '#a367dc', '#c767dc', '#dc67ce', '#dc67ce']}
+                                customSegmentStops={[0, 30, 50, 70, 80, 90, 95, 97, 100]}
+                                value={50}
+                                textColor={textColor}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className='midBoxes'>
                     <h1>Sorry</h1>
