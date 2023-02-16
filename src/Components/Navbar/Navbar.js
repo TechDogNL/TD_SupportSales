@@ -29,13 +29,13 @@ const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-light bg-light">
-                <div className="container-fluid d-flex justify-content-center p-0 ">
+                <div className="container-fluid d-flex justify-content-center p-0 mt-0">
                     <div className='col-3'>
                     </div>
                     <div className='col-6 d-flex justify-content-center'>
                         <img src={logo} id='logo' className="img-fluid" alt=""></img>
                     </div>
-                    <div className='col-3 d-flex justify-content-end pt-2'>
+                    <div className='col-3 d-flex justify-content-end'>
                     <Button type="button"  color="secondary" id="popoverButton" data-bs-toggle="popover" data-bs-content="Popup content" onClick={e => setPopoverOpen(!popoverOpen)}>
                       <FontAwesomeIcon icon={faCalendar} />
                     </Button>
