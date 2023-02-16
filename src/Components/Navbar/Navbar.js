@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-light bg-light">
+            <nav className="navbar navbar-light bg-white">
                 <div className="container-fluid d-flex justify-content-center p-0 mt-0">
                     <div className='col-3'>
                     </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
                         </LocalizationProvider>
                       </PopoverBody>
                     </Popover>
-                    <div>
+                    <div className='month' onClick={e => setPopoverOpen(!popoverOpen)}>
                       <p className='MonthShow rounded-2 py-1 border-4'>{date.format('MMM').toUpperCase()}</p>
                     </div>
                     </div>

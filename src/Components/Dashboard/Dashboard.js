@@ -1,13 +1,37 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import ReactSpeedometer from "react-d3-speedometer"
+import { Chart } from "react-google-charts";
 import './Dashboard.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
+const data = [
+    ["City", "2010 Population", "2000 Population"],
+    ["knikker, NY", 8175000, 8008000],
+    ["Los Angeles, CA", 3792000, 3694000],
+    ["Chicago, IL", 2695000, 2896000],
+    ["Houston, TX", 2099000, 1953000],
+    ["Philadelphia, PA", 1526000, 1517000],
+  ];
+  
+const options = {
+    title: "Population of Largest U.S. Cities",
+    chartArea: { width: "50%" },
+    colors: ["#b0120a", "#ffab91"],
+    hAxis: {
+      title: "Total Population",
+      minValue: 0,
+    },
+    vAxis: {
+      title: "City",
+    },
+  };
+
 const Dashboard = () => {
-    const textColor = '#f8f9fa'
+    const textColor = '#ffffff'
+    
     return (
     <div className='body'>
         <Navbar />
@@ -56,8 +80,14 @@ const Dashboard = () => {
             </div>
             <div className='d-flex flex-column col-4 ps-3 pe-3 pb-4 pt-4'>
                 <div className='bigBoxes'>
-                    <div className='h-100'>
-                        <h1>Sorry</h1>
+                    <div className='pt-3 mx-3 mb-3'>
+                    <Chart
+                        chartType="BarChart"
+                        width="100%"
+                        height="250px"
+                        data={data}
+                        options={options}
+                    />
                     </div>
                 </div>
                 <div className='bigBoxes'>
@@ -66,31 +96,35 @@ const Dashboard = () => {
                             <h3>Ranglijst</h3>
                         </div>
                         <div className='row ps-3'>
-                            <div className='col-6'>
-                                <h2>1 Jane Doe</h2>
-                                <h2>2 Jane Doe</h2>
-                                <h2>3 Jane Doe</h2>
-                                <h2>4 Jane Doe</h2>
-                                <h2>5 Jane Doe</h2>
+                            <div className='col-6 text-nowrap'>
+                                <h4>1 Jane Doe</h4>
+                                <h4>2 Jane Doe</h4>
+                                <h4>3 Jane Doe</h4>
+                                <h4>4 Jane Doe</h4>
+                                <h4>5 Jane Doe</h4>
                             </div>
-                            <div className='col-6'>
-                                <h2>6 Jane Doe</h2>
-                                <h2>7 Jane Doe</h2>
-                                <h2>8 Jane Doe</h2>
-                                <h2>9 Jane Doe</h2>
-                                <h2>10 Jane Doe</h2>
+                            <div className='col-6 text-nowrap'>
+                                <h4>6 Jane Doe</h4>
+                                <h4>7 Jane Doe</h4>
+                                <h4>8 Jane Doe</h4>
+                                <h4>9 Jane Doe</h4>
+                                <h4>10 Jane Doe</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='d-flex flex-column col-5 ps-3 pe-3 pb-4 pt-4'>
+            <div className='d-flex flex-column col-5 px-3 py-4'>
                 <div className='midBoxes'>
-                    <div className=' d-flex p-4 justify-content-between'>
-                        <div className='mb-3'>
+                    <div className='container d-flex p-4 justify-content-between'>
+                        <div className='mb-3 col-5'>
                             <h4>Bonus</h4>
+                            <div className='d-flex container justify-content-center flex-column align-content-center h-50'>
+                                <h5>Bedrag: € 7500</h5>
+                                <h5>Te gaan: € 2500</h5>
+                            </div>
                         </div>
-                        <div>
+                        <div className='col-7'>
                             <ReactSpeedometer
                                 className='reactSpeed'
                                 minValue={0}

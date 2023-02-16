@@ -9,7 +9,7 @@
 }
 
 .smallBoxes {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   margin-bottom: 1rem;
   border-radius: 1.75rem;
   flex-grow: 1;
@@ -18,7 +18,7 @@
 }
 
 .bigBoxes {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   margin-bottom: 1rem;
   border-radius: 1.75rem;
   flex-grow: 1;
@@ -26,7 +26,7 @@
 }
 
 .midBoxes {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   margin-bottom: 1rem;
   border-radius: 1.75rem;
   flex-grow: 1;
@@ -35,4 +35,3 @@
   width: 150px !important;
   height: 150px !important;
 }
-

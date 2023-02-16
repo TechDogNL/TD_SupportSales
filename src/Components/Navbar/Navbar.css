@@ -6,6 +6,10 @@ Nav {
  border: none;
 }
 
+.month:hover {
+    cursor: pointer;
+}
+
 #logo {
     height: 6vh;
     width: fit-content;
