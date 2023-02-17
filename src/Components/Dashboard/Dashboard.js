@@ -7,27 +7,86 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
-const data = [
-    ["City", "2010 Population", "2000 Population"],
-    ["knikker, NY", 8175000, 8008000],
-    ["Los Angeles, CA", 3792000, 3694000],
-    ["Chicago, IL", 2695000, 2896000],
-    ["Houston, TX", 2099000, 1953000],
-    ["Philadelphia, PA", 1526000, 1517000],
-  ];
+const besteVerkoper1 = [
+    ["S.T.B.", "",],
+    ["S.T.B , Jan", 5175],
+    ["S.T.B , Feb", 3792],
+    ["S.T.B , Mrt", 2695],
+    ["S.T.B , Apr", 5099],
+    ["S.T.B , Mei", 1526],
+    ["S.T.B , Jun", 3426],
+];
   
+
 const options = {
-    title: "Population of Largest U.S. Cities",
     chartArea: { width: "50%" },
-    colors: ["#b0120a", "#ffab91"],
+    colors: ["#2c475c"],
     hAxis: {
-      title: "Total Population",
       minValue: 0,
     },
     vAxis: {
-      title: "City",
     },
-  };
+};
+
+const besteVerkoper2 = [
+    ["S.T.B ", "",],
+    ["S.T.B , Jul", 5175],
+    ["S.T.B , Aug", 3792],
+    ["S.T.B , Sep", 2695],
+    ["S.T.B , Okt", 5099],
+    ["S.T.B , Nov", 1526],
+    ["S.T.B , Dec", 3426],
+];
+  
+const options2 = {
+    chartArea: { width: "50%" },
+    colors: ["#2c475c"],
+    hAxis: {
+      minValue: 0,
+    },
+    vAxis: {
+    },
+};
+
+const data = [
+    ["", ""],
+    ["S.T.B.", 1000],
+    ["S.T.B.", 1170],
+    ["S.T.B.", 660],
+    ["S.T.B.", 1030],
+    ["S.T.B.", 1000],
+    ["S.T.B.", 1170],
+    ["S.T.B.", 660],
+    ["S.T.B.", 1030],
+    ["S.T.B.", 1000],
+    ["S.T.B.", 1170],
+];
+  
+const optionsTotaal = {
+    colors: ["#2c475c"],
+    chart: {
+    },
+};
+
+  const data2 = [
+    ["", ""],
+    ["2014", 1000],
+    ["2015", 1170],
+    ["2016", 660],
+    ["2017", 1030],
+    ["2014", 1000],
+    ["2015", 1170],
+    ["2016", 660],
+    ["2017", 1030],
+    ["2014", 1000],
+    ["2015", 1170],
+];
+  
+const optionsTotaal2 = {
+    colors: ["#2c475c"],
+    chart: {
+    },
+};
 
 const Dashboard = () => {
     const textColor = '#ffffff'
@@ -39,76 +98,84 @@ const Dashboard = () => {
             <div className='d-flex flex-column col-3 ps-3 pe-3 pb-4 pt-4'>
                 <div className='smallBoxes'>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Totaal</h3>
-                        <h3>€12.977</h3>
+                        <h5>Totaal</h5>
+                        <h5>€12.977</h5>
                     </div>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Gem</h3>
-                        <h3>€577</h3>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Deals</h3>
-                        <h3>1677</h3>
+                        <h5>Gem</h5>
+                        <h5>€577</h5>
                     </div>
                 </div>
                 <div className='smallBoxes'>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Nieuwe Deals</h3>
-                        <h3>587</h3>
+                        <h5>Deals</h5>
+                        <h5>1677</h5>
                     </div>
                 </div>
                 <div className='smallBoxes'>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Nieuwe Totaal</h3>
-                        <h3>€4077</h3>
+                        <h5>Nieuwe Deals</h5>
+                        <h5>587</h5>
                     </div>
                 </div>
                 <div className='smallBoxes'>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Bestaande Deals</h3>
-                        <h3>6377</h3>
+                        <h5>Nieuwe Totaal</h5>
+                        <h5>€4077</h5>
                     </div>
                 </div>
                 <div className='smallBoxes'>
                     <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h3>Bestaande Totaal</h3>
-                        <h3>€80.377</h3>
+                        <h5>Bestaande Deals</h5>
+                        <h5>6377</h5>
+                    </div>
+                </div>
+                <div className='smallBoxes'>
+                    <div className=' d-flex flex-column justify-content-evenly text-center'>
+                        <h5>Bestaande Totaal</h5>
+                        <h5>€80.377</h5>
                     </div>
                 </div>
             </div>
             <div className='d-flex flex-column col-4 ps-3 pe-3 pb-4 pt-4'>
                 <div className='bigBoxes'>
-                    <div className='pt-3 mx-3 mb-3'>
+                <h5 className='ps-4 pt-3 pb-2'>Beste verkoper van de maand</h5>
+                    <div className='chartsBar mx-3 mb-3 d-flex flex-row justify-content-evenly'>
                     <Chart
                         chartType="BarChart"
-                        width="100%"
+                        width="90%"
                         height="250px"
-                        data={data}
+                        data={besteVerkoper1}
                         options={options}
+                    />
+                       <Chart
+                        chartType="BarChart"
+                        width="90%"
+                        height="250px"
+                        data={besteVerkoper2}
+                        options={options2}
                     />
                     </div>
                 </div>
                 <div className='bigBoxes'>
-                    <div className='p-4 h-100'>
+                    <div className='p-3 '>
                         <div className='mb-3 ps-3'>
-                            <h3>Ranglijst</h3>
+                            <h4>Ranglijst</h4>
                         </div>
                         <div className='row ps-3'>
                             <div className='col-6 text-nowrap'>
-                                <h4>1 Jane Doe</h4>
-                                <h4>2 Jane Doe</h4>
-                                <h4>3 Jane Doe</h4>
-                                <h4>4 Jane Doe</h4>
-                                <h4>5 Jane Doe</h4>
+                                <h5>1 Jane Doe</h5>
+                                <h5>2 Jane Doe</h5>
+                                <h5>3 Jane Doe</h5>
+                                <h5>4 Jane Doe</h5>
+                                <h5>5 Jane Doe</h5>
                             </div>
                             <div className='col-6 text-nowrap'>
-                                <h4>6 Jane Doe</h4>
-                                <h4>7 Jane Doe</h4>
-                                <h4>8 Jane Doe</h4>
-                                <h4>9 Jane Doe</h4>
-                                <h4>10 Jane Doe</h4>
+                                <h5>6 Jane Doe</h5>
+                                <h5>7 Jane Doe</h5>
+                                <h5>8 Jane Doe</h5>
+                                <h5>9 Jane Doe</h5>
+                                <h5>10 Jane Doe</h5>
                             </div>
                         </div>
                     </div>
@@ -116,10 +183,10 @@ const Dashboard = () => {
             </div>
             <div className='d-flex flex-column col-5 px-3 py-4'>
                 <div className='midBoxes'>
-                    <div className='container d-flex p-4 justify-content-between'>
+                    <div className='speedoMeter d-flex p-4 justify-content-between'>
                         <div className='mb-3 col-5'>
                             <h4>Bonus</h4>
-                            <div className='d-flex container justify-content-center flex-column align-content-center h-50'>
+                            <div className='d-flex justify-content-center flex-column align-content-center h-100'>
                                 <h5>Bedrag: € 7500</h5>
                                 <h5>Te gaan: € 2500</h5>
                             </div>
@@ -141,11 +208,29 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className='midBoxes'>
-                    <h1>Sorry</h1>
+                <div className='midBoxes p-2'>
+                    <h4 className='p-2'>Personeel totaal van de maand</h4>
+                    <div className='d-flex justify-content-center chart'>
+                    <Chart
+                        chartType="Bar"
+                        width="100%"
+                        height="100px"
+                        data={data}
+                        options={optionsTotaal}
+                    />
+                    </div>
                 </div>
-                <div className='midBoxes'>
-                    <h1>Sorry</h1>
+                <div className='midBoxes p-2'>
+                    <h5 className='p-2'>Meest verkochte product van de maand</h5>
+                    <div className='d-flex justify-content-center chart'>
+                    <Chart
+                        chartType="Bar"
+                        width="100%"
+                        height="100px"
+                        data={data2}
+                        options={optionsTotaal2}
+                    />
+                    </div>
                 </div>
             </div>
         </div>
