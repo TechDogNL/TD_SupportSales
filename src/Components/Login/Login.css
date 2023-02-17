@@ -1,0 +1,9 @@
+.body {
+    height:  74vh;
+    background-color: #dee0e2;
+}
+
+#password {
+    width: 500px;
+    height: 50px;
+}
