@@ -23,9 +23,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <nav className=' bg-light d-flex justify-content-center'>
-                <img src={logo} id='logo' className="img-fluid col-4 p-3" alt=""></img>
-            </nav>
         </div>
     );
 }
