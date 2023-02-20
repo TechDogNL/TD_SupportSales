@@ -1,66 +1,69 @@
 .body {
-  max-height: 100vh;
-    background-color: #2c475c;
-  }
-
-.box-container {
-  height: 89vh;
-  margin: 0px;
+  height: 100vh;
+  background-color: #2c475c;
 }
 
-.smallBoxes {
+.midbox {
   background-color: #ffffff;
-  margin-bottom: 1rem;
-  border-radius: 1.75rem;
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-around;
 }
 
-.bigBoxes {
+.bigbox {
   background-color: #ffffff;
-  margin-bottom: 1rem;
-  border-radius: 1.75rem;
-  flex-grow: 1;
-  /* max-height: 39vh; */
 }
 
-.midBoxes {
+.biggestbox {
   background-color: #ffffff;
-  margin-bottom: 1rem;
-  border-radius: 1.75rem;
-  flex-grow: 1;
+}
+
+.smallboxes {
+  background-color: #ffffff;
+}
+
+.icon {
+  transform: rotate(20deg);
+}
+
+.text {
+  font-size: medium;
 }
 
 svg.speedometer {
-  height: 150px !important;
+  height: 160px !important;
   width: 281px !important;
   position: relative;
-  right: 20px;
+  top: -30px;
 }
 
-.chart {
- position: relative;
- left: 24px;
-}
-
-.chart > div > div > div > div > svg > g > rect {
+.biggestbox > div > div > div > div > div > svg > g > rect {
   display: none;
 }
 
-.chartsBar {
+.midbox > div > div > div > div > div > div > svg > g > g > rect {
+  display: none;
+}
+
+.midbox > div > div > div > div > div > div > svg {
   position: relative;
-  top: -15px;
-}
-
-.chartsBar > div > div > div > div > div > svg > g > g > rect {
- display: none;
-}
-
-
-.chart > div > div > div > div > svg > g > text{
-  font-size: 10px !important;
-  word-break: break-all !important;
-  white-space: pre-wrap !important;
+  left: 20px;
+  overflow:hidden
 
 }
+
+.biggestbox > div > div > div > div > div > svg {
+  position: relative;
+  left: 12px;
+
+}
+
+.midbox > div > div > div > div > div > div > svg > g > g > g > rect:first-child[width="1"] {
+  display: block;
+}
+
+.midbox > div > div > div > div > div > div > svg > g > g > g > rect[width="1"] {
+  display: none; 
+}
+
+.midbox > div > div > div > div > div > div > svg > g > g > g >text[text-anchor="middle"] {
+  display: none; 
+}
+/* je kan de bar indivudieel en kleur geven door de child te selecteren van de bar*/

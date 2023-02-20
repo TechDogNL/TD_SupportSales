@@ -5,21 +5,23 @@ import { Chart } from "react-google-charts";
 import './Dashboard.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMedal } from '@fortawesome/free-solid-svg-icons'
 
 
-const besteVerkoper1 = [
-    ["S.T.B.", "",],
-    ["S.T.B , Jan", 5175],
-    ["S.T.B , Feb", 3792],
-    ["S.T.B , Mrt", 2695],
-    ["S.T.B , Apr", 5099],
-    ["S.T.B , Mei", 1526],
-    ["S.T.B , Jun", 3426],
+const bestSeller = [
+    ["S.T.B.h.", "",],
+    ["S.T.B.H.", 10175],
+    ["S.T.B", 3792],
+    ["S.T.B", 2695],
+    ["S.T.B", 5099],
+
 ];
   
 
 const options = {
-    chartArea: { width: "50%" },
+    chartArea: { width: "60%" },
+    backgroundColor: 'transparent',
     colors: ["#2c475c"],
     hAxis: {
       minValue: 0,
@@ -28,18 +30,17 @@ const options = {
     },
 };
 
-const besteVerkoper2 = [
+const bestService = [
     ["S.T.B ", "",],
     ["S.T.B , Jul", 5175],
     ["S.T.B , Aug", 3792],
     ["S.T.B , Sep", 2695],
     ["S.T.B , Okt", 5099],
-    ["S.T.B , Nov", 1526],
-    ["S.T.B , Dec", 3426],
 ];
   
-const options2 = {
-    chartArea: { width: "50%" },
+const optionsServices = {
+    chartArea: { width: "60%" },
+    backgroundColor: 'transparent',
     colors: ["#2c475c"],
     hAxis: {
       minValue: 0,
@@ -48,38 +49,20 @@ const options2 = {
     },
 };
 
-const data = [
-    ["", ""],
-    ["S.T.B.", 1000],
-    ["S.T.B.", 1170],
-    ["S.T.B.", 660],
-    ["S.T.B.", 1030],
-    ["S.T.B.", 1000],
-    ["S.T.B.", 1170],
-    ["S.T.B.", 660],
-    ["S.T.B.", 1030],
-    ["S.T.B.", 1000],
-    ["S.T.B.", 1170],
-];
-  
-const optionsTotaal = {
-    colors: ["#2c475c"],
-    chart: {
-    },
-};
-
   const data2 = [
     ["", ""],
-    ["2014", 1000],
-    ["2015", 1170],
-    ["2016", 660],
-    ["2017", 1030],
-    ["2014", 1000],
-    ["2015", 1170],
-    ["2016", 660],
-    ["2017", 1030],
-    ["2014", 1000],
-    ["2015", 1170],
+    ["Jan", 1000],
+    ["Feb", 1170],
+    ["Mrt", 660],
+    ["Apr", 1030],
+    ["Mei", 1000],
+    ["Jun", 1170],
+    ["Jul", 660],
+    ["Aug", 1030],
+    ["Sep", 1000],
+    ["Okt", 1170],
+    ["Nov", 1000],
+    ["Dec", 1170],
 ];
   
 const optionsTotaal2 = {
@@ -92,106 +75,34 @@ const Dashboard = () => {
     const textColor = '#ffffff'
     
     return (
-    <div className='body'>
+        <div className='body'>
         <Navbar />
-        <div className='box-container d-flex'>
-            <div className='d-flex flex-column col-3 ps-3 pe-3 pb-4 pt-4'>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Totaal</h5>
-                        <h5>€12.977</h5>
+        <div className='box-container d-flex flex-column'>
+            <div className='d-flex flex-row col-12 px-3 pt-1 pb-1 my-1 justify-content-between'>
+                <div className='midbox d-flex col-3 m-2 rounded-2  flex-column align-content-center'>
+                <div className='mt-3  d-flex justify-content-center'>
+                        <h5>Ranglijst van {}</h5>
                     </div>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Gem</h5>
-                        <h5>€577</h5>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Deals</h5>
-                        <h5>1677</h5>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Nieuwe Deals</h5>
-                        <h5>587</h5>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Nieuwe Totaal</h5>
-                        <h5>€4077</h5>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Bestaande Deals</h5>
-                        <h5>6377</h5>
-                    </div>
-                </div>
-                <div className='smallBoxes'>
-                    <div className=' d-flex flex-column justify-content-evenly text-center'>
-                        <h5>Bestaande Totaal</h5>
-                        <h5>€80.377</h5>
-                    </div>
-                </div>
-            </div>
-            <div className='d-flex flex-column col-4 ps-3 pe-3 pb-4 pt-4'>
-                <div className='bigBoxes'>
-                <h5 className='ps-4 pt-3 pb-2'>Beste verkoper van de maand</h5>
-                    <div className='chartsBar mx-3 mb-3 d-flex flex-row justify-content-evenly'>
+                    <div className='d-flex justify-content-center pb-1'>
                     <Chart
                         chartType="BarChart"
-                        width="90%"
+                        width="101%"
                         height="250px"
-                        data={besteVerkoper1}
+                        data={bestSeller}
                         options={options}
                     />
-                       <Chart
-                        chartType="BarChart"
-                        width="90%"
-                        height="250px"
-                        data={besteVerkoper2}
-                        options={options2}
-                    />
                     </div>
                 </div>
-                <div className='bigBoxes'>
-                    <div className='p-3 '>
-                        <div className='mb-3 ps-3'>
-                            <h4>Ranglijst</h4>
+                <div className='bigbox col-5 m-2 rounded-2'>
+                <div className='my-3  d-flex justify-content-center'>
+                            <h4>Team target van {}</h4>
                         </div>
-                        <div className='row ps-3'>
-                            <div className='col-6 text-nowrap'>
-                                <h5>1 Jane Doe</h5>
-                                <h5>2 Jane Doe</h5>
-                                <h5>3 Jane Doe</h5>
-                                <h5>4 Jane Doe</h5>
-                                <h5>5 Jane Doe</h5>
+                <div className='speedoMeter d-flex p-4 justify-content-evenly'>
+                            <div className='d-flex justify-content-center flex-column align-content-between'>
+                                <h4>Bedrag: € 7500</h4>
+                                <h4>Te gaan: € 2500</h4>
                             </div>
-                            <div className='col-6 text-nowrap'>
-                                <h5>6 Jane Doe</h5>
-                                <h5>7 Jane Doe</h5>
-                                <h5>8 Jane Doe</h5>
-                                <h5>9 Jane Doe</h5>
-                                <h5>10 Jane Doe</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='d-flex flex-column col-5 px-3 py-4'>
-                <div className='midBoxes'>
-                    <div className='speedoMeter d-flex p-4 justify-content-between'>
-                        <div className='mb-3 col-5'>
-                            <h4>Bonus</h4>
-                            <div className='d-flex justify-content-center flex-column align-content-center h-100'>
-                                <h5>Bedrag: € 7500</h5>
-                                <h5>Te gaan: € 2500</h5>
-                            </div>
-                        </div>
-                        <div className='col-7'>
+                        <div className=''>
                             <ReactSpeedometer
                                 className='reactSpeed'
                                 minValue={0}
@@ -202,39 +113,104 @@ const Dashboard = () => {
                                 labelFontSize={'0'}
                                 segmentColors={['#67b7dc', '#6794dc', '#6771dc', '#8067dc', '#a367dc', '#c767dc', '#dc67ce', '#dc67ce']}
                                 customSegmentStops={[0, 30, 50, 70, 80, 90, 95, 97, 100]}
-                                value={50}
+                                value={40}
                                 textColor={textColor}
                             />
                         </div>
                     </div>
                 </div>
-                <div className='midBoxes p-2'>
-                    <h4 className='p-2'>Personeel totaal van de maand</h4>
-                    <div className='d-flex justify-content-center chart'>
+                <div className='midbox col-3 m-2 rounded-2 d-flex flex-column justify-content-center'>
+                <div className='mt-3  d-flex justify-content-center'>
+                        <h5>Verkochte diensten in {}</h5>
+                    </div>
+                    <div className='d-flex justify-content-center pb-1'>
                     <Chart
-                        chartType="Bar"
-                        width="100%"
-                        height="100px"
-                        data={data}
-                        options={optionsTotaal}
+                        chartType="BarChart"
+                        width="101%"
+                        height="250px"
+                        data={bestService}
+                        options={optionsServices}
                     />
                     </div>
                 </div>
-                <div className='midBoxes p-2'>
-                    <h5 className='p-2'>Meest verkochte product van de maand</h5>
-                    <div className='d-flex justify-content-center chart'>
+            </div>
+            <div className='d-flex flex-row col-12 px-3 pb-3 pt-1 justify-content-between'>
+                <div className='biggestbox col-7 ms-2 rounded-2'>
+                    <div className='d-flex justify-content-center p-3'>
+                        <h4>Ranglijst afgelopen 12 maanden</h4>
+                    </div>
+                    <div className=' m-4'>
                     <Chart
                         chartType="Bar"
                         width="100%"
-                        height="100px"
+                        height="125px"
                         data={data2}
                         options={optionsTotaal2}
                     />
                     </div>
                 </div>
+                <div className='col-5 d-flex flex-column justify-content-between'>
+                    <div className='col-12 ms-2 d-flex flex-row justify-content-around mb-2'>
+                        <div className='smallboxes col-5 rounded-2 p-3 d-flex text-center flex-column'>
+                            <p className='text mb-2'>Beste verkoper van de afgelopen maand</p>
+                            <h3>Sven  <FontAwesomeIcon icon={faMedal} className="icon" /></h3>
+                        </div>
+                        <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
+                        <div>
+                                <p className='m-0'>Totaal nieuwe deals</p>
+                                <h4>€ 10.000</h4>
+                            </div>
+                            <div className='d-flex justify-content-around text-wrap flex-row'>
+                                <div>
+                                    <p className='m-0'>Deals</p>
+                                    <h5>124</h5>
+                                </div>
+                                <div>
+                                    <p className='m-0'>Gem. order</p>
+                                    <h5>€ 80,65</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-12 d-flex ms-2 flex-row justify-content-around mt-2'>
+                        <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
+                            <div>
+                                <p className='m-0'>Totaal nieuwe deals</p>
+                                <h4>€ 10.000</h4>
+                            </div>
+                            <div className='d-flex justify-content-around text-wrap flex-row'>
+                                <div>
+                                    <p className='m-0'>Deals</p>
+                                    <h5>124</h5>
+                                </div>
+                                <div>
+                                    <p className='m-0'>Gem. order</p>
+                                    <h5>€ 80,65</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
+                        <div>
+                                <p className='m-0'>Totaal nieuwe deals</p>
+                                <h4>€ 10.000</h4>
+                            </div>
+                            <div className='d-flex justify-content-around text-wrap flex-row'>
+                                <div>
+                                    <p className='m-0'>Deals</p>
+                                    <h5>124</h5>
+                                </div>
+                                <div>
+                                    <p className='m-0'>Gem. order</p>
+                                    <h5>€ 80,65</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     );
 }
 
