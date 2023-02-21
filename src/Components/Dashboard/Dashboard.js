@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import ReactSpeedometer from "react-d3-speedometer"
 import { Chart } from "react-google-charts";
+import axios from 'axios';
 import './Dashboard.css'
+import './ChartStyles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMedal } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 const bestSeller = [
@@ -72,6 +76,19 @@ const optionsTotaal2 = {
 };
 
 const Dashboard = () => {
+
+    const [bestSeller, setBestSeller] = useState([]);
+
+    // const fetchAll = () => {
+    //     axios.get('https://support.sales.techdog.cloud/api/rankList', {
+    //         ApiKey: 
+    //     });
+    // }
+
+    // useEffect(() => {
+    //     fetchAll();
+    // }, []);
+
     const textColor = '#ffffff'
     
     return (
@@ -99,8 +116,8 @@ const Dashboard = () => {
                         </div>
                 <div className='speedoMeter d-flex p-4 justify-content-evenly'>
                             <div className='d-flex justify-content-center flex-column align-content-between'>
-                                <h4>Bedrag: € 7500</h4>
-                                <h4>Te gaan: € 2500</h4>
+                                <h4 className='current'>Bedrag: € 7500</h4>
+                                <h4 className='toGo'>Te gaan: € 2500</h4>
                             </div>
                         <div className=''>
                             <ReactSpeedometer
@@ -153,21 +170,21 @@ const Dashboard = () => {
                     <div className='col-12 ms-2 d-flex flex-row justify-content-around mb-2'>
                         <div className='smallboxes col-5 rounded-2 p-3 d-flex text-center flex-column'>
                             <p className='text mb-2'>Beste verkoper van de afgelopen maand</p>
-                            <h3>Sven  <FontAwesomeIcon icon={faMedal} className="icon" /></h3>
+                            <h3 className='sellerofthemonth'>Sven  <FontAwesomeIcon icon={faMedal} className="icon" /></h3>
                         </div>
                         <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                         <div>
-                                <p className='m-0'>Totaal nieuwe deals</p>
-                                <h4>€ 10.000</h4>
+                                <p className='m-0'>Totaal vorige maand</p>
+                                <h4 className='totalmoney'>€ 10.000</h4>
                             </div>
                             <div className='d-flex justify-content-around text-wrap flex-row'>
                                 <div>
                                     <p className='m-0'>Deals</p>
-                                    <h5>124</h5>
+                                    <h5 className='dealsAndGemOrders'>124</h5>
                                 </div>
                                 <div>
                                     <p className='m-0'>Gem. order</p>
-                                    <h5>€ 80,65</h5>
+                                    <h5 className='dealsAndGemOrders'>€ 80,65</h5>
                                 </div>
                             </div>
                         </div>
@@ -176,32 +193,32 @@ const Dashboard = () => {
                         <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                             <div>
                                 <p className='m-0'>Totaal nieuwe deals</p>
-                                <h4>€ 10.000</h4>
+                                <h4 className='totalmoney'>€ 10.000</h4>
                             </div>
                             <div className='d-flex justify-content-around text-wrap flex-row'>
                                 <div>
                                     <p className='m-0'>Deals</p>
-                                    <h5>124</h5>
+                                    <h5 className='dealsAndGemOrders'>124</h5>
                                 </div>
                                 <div>
                                     <p className='m-0'>Gem. order</p>
-                                    <h5>€ 80,65</h5>
+                                    <h5 className='dealsAndGemOrders'>€ 80,65</h5>
                                 </div>
                             </div>
                         </div>
                         <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                         <div>
-                                <p className='m-0'>Totaal nieuwe deals</p>
-                                <h4>€ 10.000</h4>
+                                <p className='m-0'>Totaal bestaande deals</p>
+                                <h4 className='totalmoney'>€ 10.000</h4>
                             </div>
                             <div className='d-flex justify-content-around text-wrap flex-row'>
                                 <div>
                                     <p className='m-0'>Deals</p>
-                                    <h5>124</h5>
+                                    <h5 className='dealsAndGemOrders'>124</h5>
                                 </div>
                                 <div>
                                     <p className='m-0'>Gem. order</p>
-                                    <h5>€ 80,65</h5>
+                                    <h5 className='dealsAndGemOrders'>€ 80,65</h5>
                                 </div>
                             </div>
                         </div>
