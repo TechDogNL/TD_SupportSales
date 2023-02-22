@@ -5,14 +5,17 @@
 
 .midbox {
   background-color: #ffffff;
+  height: 300px;
 }
 
 .bigbox {
   background-color: #ffffff;
+  height: 300px;
 }
 
 .biggestbox {
   background-color: #ffffff;
+  height: 280px;
 }
 
 .smallboxes {
@@ -21,6 +24,45 @@
 
 .icon {
   transform: rotate(20deg);
+}
+
+.totalmoney {
+  color: rgb(103 148 220);
+  font-weight: bolder
+}
+
+.current {
+  color: rgb(103 148 220);
+  font-weight: bold;
+}
+
+.midBoxCharts {
+  position: relative;
+  bottom: 60px;
+}
+
+.biggestBoxChart {
+  position: relative;
+  bottom: 70px;
+}
+
+.toGo {
+  color: rgb(220 103 206);
+  font-weight: bold;
+}
+
+.dealsAndGemOrders {
+  color: rgb(128 103 220);
+  font-weight: bolder
+}
+
+.sellerofthemonth {
+  color: rgb(163 103 220);
+}
+
+.textEndGoal {
+  position: relative;
+  bottom: 50px;
 }
 
 .text {
@@ -34,36 +76,4 @@ svg.speedometer {
   top: -30px;
 }
 
-.biggestbox > div > div > div > div > div > svg > g > rect {
-  display: none;
-}
-
-.midbox > div > div > div > div > div > div > svg > g > g > rect {
-  display: none;
-}
-
-.midbox > div > div > div > div > div > div > svg {
-  position: relative;
-  left: 20px;
-  overflow:hidden
-
-}
-
-.biggestbox > div > div > div > div > div > svg {
-  position: relative;
-  left: 12px;
-
-}
-
-.midbox > div > div > div > div > div > div > svg > g > g > g > rect:first-child[width="1"] {
-  display: block;
-}
-
-.midbox > div > div > div > div > div > div > svg > g > g > g > rect[width="1"] {
-  display: none; 
-}
-
-.midbox > div > div > div > div > div > div > svg > g > g > g >text[text-anchor="middle"] {
-  display: none; 
-}
 /* je kan de bar indivudieel en kleur geven door de child te selecteren van de bar*/

@@ -1,0 +1,81 @@
+.biggestbox > div > div > div > div > div > svg > g > rect {
+    display: none;
+  }
+  
+  .midbox > div > div > div > div > div > div > svg > g > g > rect {
+    display: none;
+  }
+  
+  .midbox > div > div > div > div > div > div > svg {
+    position: relative;
+    left: 10px;
+    overflow:hidden
+  }
+
+  .midbox > div > div > div > div > div > div > svg > g > g > g > text {
+    position: absolute !important;
+    left: 10px;
+    font-size: xx-small;
+  }
+  
+  .biggestbox > div > div > div > div > div > svg {
+    position: relative;
+    left: 12px;
+  }
+
+.chartBar > div > div > div > div {
+    width: 200px !important;
+}
+
+.midBoxCharts > div > div > div > svg {
+    background: rgb(0, 0, 0, 0) !important;
+}
+.biggestBoxChart > div > div > div > svg {
+    background: rgb(0, 0, 0, 0) !important;
+}
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(1n) {
+    fill: rgb(163 103 220);
+  }
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(2n) {
+    fill: rgb(103 183 220);
+  }
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(3n) {
+    fill: rgb(166 221 242);
+  }
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(4n) {
+    fill: rgb(199 103 220);
+  }
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(5n) {
+    fill: rgb(103 113 220);
+  }
+  .biggestbox > div > div > div > div > div > svg > g > path:nth-child(6n) {
+    fill: rgb(78 126 166);
+  }
+
+  
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect:first-child[width="1"] {
+    display: block;
+    width: 3px;
+    border-radius: 100%;
+  }
+
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect:nth-child(1n)[height="24"] {
+    fill: rgb(163 103 220); 
+  }
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect:nth-child(2n)[height="24"] {
+    fill: rgb(103 183 220); 
+  }
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect:nth-child(3n)[height="24"] {
+    fill: rgb(166 221 242); 
+  }
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect:nth-child(4n)[height="24"] {
+    fill: rgb(199 103 220); 
+  }
+  
+  .midbox > div > div > div > div > div > div > svg > g > g > g > rect[width="1"] {
+    display: none; 
+  }
+  
+  .midbox > div > div > div > div > div > div > svg > g > g > g >text[text-anchor="middle"] {
+    display: none; 
+  }

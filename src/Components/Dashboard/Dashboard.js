@@ -3,94 +3,109 @@ import Navbar from '../Navbar/Navbar';
 import ReactSpeedometer from "react-d3-speedometer"
 import { Chart } from "react-google-charts";
 import axios from 'axios';
+import Plot from 'react-plotly.js';
 import './Dashboard.css'
 import './ChartStyles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMedal } from '@fortawesome/free-solid-svg-icons'
+import dayjs, { Dayjs } from 'dayjs';
 
 
+function capitalize(month) {
+    return month.charAt(0).toUpperCase() + month.slice(1);
+  }
 
+  const xRankList = [5000,9666, 10000, 2870, 1500,];
+  const yRankList = ["Italy <br> €1500","France <br> €1500","Spain <br> €1500","USA <br> €1500","Argentina <br> €1500"];
+  const colorsRankList = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
 
-const bestSeller = [
-    ["S.T.B.h.", "",],
-    ["S.T.B.H.", 10175],
-    ["S.T.B", 3792],
-    ["S.T.B", 2695],
-    ["S.T.B", 5099],
+  const rankListData = [{
+    x: xRankList,
+    y: yRankList,
+    type: "bar",
+    orientation: "h",
+    marker: {
+        color: colorsRankList // specify the colors for each bar
+    },
+  }];
 
-];
+  const rankListLayout = {
+    title: "",
+    xaxis: {
+      title: ""
+    },
+    yaxis: {
+      title: ""
+    },
+    height: 350,
+  };
+
+  const config = {
+    displayModeBar: false
+  };
+
+  const xSoldServicesList = [5000,9666, 10000, 2870, 1500];
+  const ySoldServicesList = ["Italy <br> €1500","France <br> €1500","Spain <br> €1500","USA <br> €1500","Argentina <br> €1500"];
+  const colorsServices = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
+
+  const SoldServicesData = [{
+    x: xSoldServicesList,
+    y: ySoldServicesList,
+    type: "bar",
+    orientation: "h",
+    marker: {
+        color: colorsServices // specify the colors for each bar
+      }
+  }];
+
+  const SoldServicesLayout = {
+    title: "",
+    xaxis: {
+      title: ""
+    },
+    yaxis: {
+      title: ""
+    },
+    height: 350,
+  };
   
 
-const options = {
-    chartArea: { width: "60%" },
-    backgroundColor: 'transparent',
-    colors: ["#2c475c"],
-    hAxis: {
-      minValue: 0,
-    },
-    vAxis: {
-    },
-};
+  const xBiggestBox = ["Italy <br> €1500",];
+  const yBiggestBox = [1500, ];
+  const colorsBiggestBox = ['rgb(163 103 220)',];
 
-const bestService = [
-    ["S.T.B ", "",],
-    ["S.T.B , Jul", 5175],
-    ["S.T.B , Aug", 3792],
-    ["S.T.B , Sep", 2695],
-    ["S.T.B , Okt", 5099],
-];
-  
-const optionsServices = {
-    chartArea: { width: "60%" },
-    backgroundColor: 'transparent',
-    colors: ["#2c475c"],
-    hAxis: {
-      minValue: 0,
-    },
-    vAxis: {
-    },
-};
+  const biggestBoxdata = [{
+    x: xBiggestBox,
+    y: yBiggestBox,
+    type: "bar",
+    marker: {
+        color: colorsBiggestBox // specify the colors for each bar
+      }
+  }];
 
-  const data2 = [
-    ["", ""],
-    ["Jan", 1000],
-    ["Feb", 1170],
-    ["Mrt", 660],
-    ["Apr", 1030],
-    ["Mei", 1000],
-    ["Jun", 1170],
-    ["Jul", 660],
-    ["Aug", 1030],
-    ["Sep", 1000],
-    ["Okt", 1170],
-    ["Nov", 1000],
-    ["Dec", 1170],
-];
-  
-const optionsTotaal2 = {
-    colors: ["#2c475c"],
-    chart: {
+  const biggestBoxlayout = {
+    title: "",
+    xaxis: {
+      title: ""
     },
-};
+    yaxis: {
+      title: ""
+    },
+    height: 300, // set a maximum height of 400 pixels for the chart
+  };
 
 const Dashboard = () => {
 
-    const [bestSeller, setBestSeller] = useState([]);
-
-    // const fetchAll = () => {
-    //     axios.get('https://support.sales.techdog.cloud/api/rankList', {
-    //         ApiKey: 
-    //     });
-    // }
-
-    // useEffect(() => {
-    //     fetchAll();
-    // }, []);
+    // const [bestSeller, setBestSeller] = useState([]);
 
     const textColor = '#ffffff'
+
+    // const [selectedMonth, setSelectedMonth] = useState();
     
+    const now = dayjs().locale('nl').format('MMMM')
+
     return (
         <div className='body'>
         <Navbar />
@@ -98,28 +113,27 @@ const Dashboard = () => {
             <div className='d-flex flex-row col-12 px-3 pt-1 pb-1 my-1 justify-content-between'>
                 <div className='midbox d-flex col-3 m-2 rounded-2  flex-column align-content-center'>
                 <div className='mt-3  d-flex justify-content-center'>
-                        <h5>Ranglijst van {}</h5>
+                        <h5 id='rankList'>Ranglijst van { capitalize(now) }</h5>
                     </div>
-                    <div className='d-flex justify-content-center pb-1'>
-                    <Chart
-                        chartType="BarChart"
-                        width="101%"
-                        height="250px"
-                        data={bestSeller}
-                        options={options}
-                    />
+                    <div className='midBoxCharts d-flex justify-content-center pb-1'>
+                        <Plot
+                            data={rankListData}
+                            layout={rankListLayout}
+                            config={config}
+                            style={{ width: "100%", height: "100%" }}
+                        />
                     </div>
                 </div>
                 <div className='bigbox col-5 m-2 rounded-2'>
                 <div className='my-3  d-flex justify-content-center'>
-                            <h4>Team target van {}</h4>
+                            <h4 id='teamTarget'>Team target van { capitalize(now) }</h4>
                         </div>
                 <div className='speedoMeter d-flex p-4 justify-content-evenly'>
                             <div className='d-flex justify-content-center flex-column align-content-between'>
-                                <h4 className='current'>Bedrag: € 7500</h4>
-                                <h4 className='toGo'>Te gaan: € 2500</h4>
+                                <p className='current '>Bedrag: € 7500</p>
+                                <p className='toGo'>Te gaan: € 2500</p>
                             </div>
-                        <div className=''>
+                        <div>
                             <ReactSpeedometer
                                 className='reactSpeed'
                                 minValue={0}
@@ -135,19 +149,20 @@ const Dashboard = () => {
                             />
                         </div>
                     </div>
+                    <h5 className='textEndGoal text-center'>Wat we gaan doen als we het target halen:</h5>
+                    <h5 className='textEndGoal text-center'>Placeholder</h5>
                 </div>
-                <div className='midbox col-3 m-2 rounded-2 d-flex flex-column justify-content-center'>
+                <div className='midbox d-flex col-3 m-2 rounded-2  flex-column align-content-center'>
                 <div className='mt-3  d-flex justify-content-center'>
-                        <h5>Verkochte diensten in {}</h5>
+                        <h5 id='soldServices'>Verkochte diensten in { capitalize(now) }</h5>
                     </div>
-                    <div className='d-flex justify-content-center pb-1'>
-                    <Chart
-                        chartType="BarChart"
-                        width="101%"
-                        height="250px"
-                        data={bestService}
-                        options={optionsServices}
-                    />
+                    <div className='midBoxCharts d-flex justify-content-center pb-1'>
+                        <Plot
+                            data={SoldServicesData}
+                            layout={SoldServicesLayout}
+                            config={config}
+                            style={{ width: "100%", height: "100%" }}
+                        />
                     </div>
                 </div>
             </div>
@@ -156,21 +171,20 @@ const Dashboard = () => {
                     <div className='d-flex justify-content-center p-3'>
                         <h4>Ranglijst afgelopen 12 maanden</h4>
                     </div>
-                    <div className=' m-4'>
-                    <Chart
-                        chartType="Bar"
-                        width="100%"
-                        height="125px"
-                        data={data2}
-                        options={optionsTotaal2}
-                    />
+                    <div className='biggestBoxChart'>
+                        <Plot
+                            data={biggestBoxdata}
+                            layout={biggestBoxlayout}
+                            config={config}
+                            style={{ width: "100%", height: "100%" }}
+                        />
                     </div>
                 </div>
                 <div className='col-5 d-flex flex-column justify-content-between'>
                     <div className='col-12 ms-2 d-flex flex-row justify-content-around mb-2'>
                         <div className='smallboxes col-5 rounded-2 p-3 d-flex text-center flex-column'>
                             <p className='text mb-2'>Beste verkoper van de afgelopen maand</p>
-                            <h3 className='sellerofthemonth'>Sven  <FontAwesomeIcon icon={faMedal} className="icon" /></h3>
+                            <h3 className='sellerofthemonth'>Mer  <FontAwesomeIcon icon={faMedal} className="icon" /></h3>
                         </div>
                         <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                         <div>

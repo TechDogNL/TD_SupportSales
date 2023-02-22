@@ -15,17 +15,24 @@ import { faChevronLeft, faChevronRight, faCalendar } from '@fortawesome/free-sol
 
 
 const Navbar = () => {
+
+    // const [selectedMonth, setSelectedMonth] = useState();
+
   function capitalize(month) {
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
   const now = dayjs().locale('nl').format();
   const [date, setDate] = useState(dayjs(now).locale('nl'));
-  console.log(capitalize(date.format('MMMM')))
+//   console.log(capitalize(date.format('MMMM')))
   // console.log(date.add(-1, 'year'))
   // console.log(date.year())
   const [popoverOpen, setPopoverOpen] = useState(false);
-
-
+  if(document.getElementById('rankList')) {
+    document.getElementById('rankList').innerHTML = "Ranglijst van " + capitalize(date.format('MMMM'));
+    document.getElementById('teamTarget').innerHTML = "Team target van " + capitalize(date.format('MMMM'));
+    document.getElementById('soldServices').innerHTML = "Verkochte diensten in " + capitalize(date.format('MMMM'));
+  }
+  
     return (
         <div>
             <nav className="navbar navbar-light bg-white">
