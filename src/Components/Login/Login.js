@@ -24,7 +24,7 @@ const Login = () => {
     return (
         <div>
             <nav className=' bg-light d-flex justify-content-center'>
-                <img src={logo} id='logo' className="img-fluid col-4 p-3" alt=""></img>
+                <img src={logo} id='logoLogin' className="img-fluid col-4 p-3" alt=""></img>
             </nav>
             <form onSubmit={handleSubmit}>
                 <div className='body d-flex justify-content-center'>

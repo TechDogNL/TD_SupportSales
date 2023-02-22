@@ -1,9 +1,14 @@
 .body {
-    height:  87vh;
+    height:  89vh;
     background-color: #dee0e2;
 }
 
 #password {
     width: 500px;
     height: 50px;
+}
+
+#logoLogin {
+    height: 11vh;
+    width: fit-content;
 }

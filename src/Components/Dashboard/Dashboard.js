@@ -107,7 +107,7 @@ const Dashboard = () => {
     const now = dayjs().locale('nl').format('MMMM')
 
     return (
-        <div className='body'>
+        <div className='bodyDashboard'>
         <Navbar />
         <div className='box-container d-flex flex-column'>
             <div className='d-flex flex-row col-12 px-3 pt-1 pb-1 my-1 justify-content-between'>

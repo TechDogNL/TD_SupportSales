@@ -40,7 +40,7 @@ const Navbar = () => {
                     <div className='col-3'>
                     </div>
                     <div className='col-6 d-flex justify-content-center'>
-                        <img src={logo} id='logo' className="img-fluid" alt=""></img>
+                        <img src={logo} id='logoNav' className="img-fluid" alt=""></img>
                     </div>
                     <div className='col-3 d-flex justify-content-end'>
                     <Button type="button"  color="secondary" id="popoverButton" data-bs-toggle="popover" data-bs-content="Popup content" onClick={e => setPopoverOpen(!popoverOpen)}>
