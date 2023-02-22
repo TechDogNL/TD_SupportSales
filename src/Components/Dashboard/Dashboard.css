@@ -1,0 +1,79 @@
+.body {
+  height: 100vh;
+  background-color: #2c475c;
+}
+
+.midbox {
+  background-color: #ffffff;
+  height: 300px;
+}
+
+.bigbox {
+  background-color: #ffffff;
+  height: 300px;
+}
+
+.biggestbox {
+  background-color: #ffffff;
+  height: 280px;
+}
+
+.smallboxes {
+  background-color: #ffffff;
+}
+
+.icon {
+  transform: rotate(20deg);
+}
+
+.totalmoney {
+  color: rgb(103 148 220);
+  font-weight: bolder
+}
+
+.current {
+  color: rgb(103 148 220);
+  font-weight: bold;
+}
+
+.midBoxCharts {
+  position: relative;
+  bottom: 60px;
+}
+
+.biggestBoxChart {
+  position: relative;
+  bottom: 70px;
+}
+
+.toGo {
+  color: rgb(220 103 206);
+  font-weight: bold;
+}
+
+.dealsAndGemOrders {
+  color: rgb(128 103 220);
+  font-weight: bolder
+}
+
+.sellerofthemonth {
+  color: rgb(163 103 220);
+}
+
+.textEndGoal {
+  position: relative;
+  bottom: 50px;
+}
+
+.text {
+  font-size: medium;
+}
+
+svg.speedometer {
+  height: 160px !important;
+  width: 281px !important;
+  position: relative;
+  top: -30px;
+}
+
+/* je kan de bar indivudieel en kleur geven door de child te selecteren van de bar*/

@@ -1,0 +1,45 @@
+Nav {
+    height: 11vh;
+}
+
+.buttons {
+ border: none;
+}
+
+.month:hover {
+    cursor: pointer;
+}
+
+#logo {
+    height: 6vh;
+    width: fit-content;
+}
+
+#popoverButton {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: xx-large;
+    width: fit-content;
+    border-color: #2c475c;
+    border-style: solid;
+    border-radius: 13px;
+    background: #2c475c;
+}
+
+.MonthPicker {
+    width: 250px !important;
+}
+
+.MonthShow {
+    border-color: #2c475c;
+    border-style: solid;
+    border-radius: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+    font-size: xx-large;
+}
+
