@@ -1,43 +1,59 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import './Login.css';
-import { InputGroup, FormControl } from 'react-bootstrap';
-import { LockFill } from 'react-bootstrap-icons';
 import logo from './logotechdoggroupmetpayoff.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useNavigate } from 'react-router-dom';
+import sales from '../Sales';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
-    const [password, setPassword] = useState();
-    const navigate = useNavigate();
+  const [password, setPassword] = useState();
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+  const cookies = new Cookies;
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(event.target.password.value);
-        if (event.target.password.value === "test") {
-            navigate("/dashboard")
-        }
-      };
+  useEffect(() => {
+    if (cookies.get('token')) {
+      navigate('dashboard');
+    }    
+  }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await sales.get(`login?password=${event.target.password.value}`);
+      setError('');
+      cookies.set('token', res.data.ApiKey);
+      if (res.data.admin == 1) {
+        navigate('admin');
+      } else {
+        navigate('dashboard');
+      }
+    } catch (error) {
+      console.warn(error);
+      setError(error.response.data.error);
+    }
+  };
 
-    return (
-        <div>
-            <nav className=' bg-light d-flex justify-content-center'>
-                <img src={logo} id='logoLogin' className="img-fluid col-4 p-3" alt=""></img>
-            </nav>
-            <form onSubmit={handleSubmit}>
-                <div className='body d-flex justify-content-center'>
-                    <div className='d-flex justify-content-center flex-column  text-center mb-4'>
-                        <h1>Enter password to login</h1>
-                        <div className="mb-3">
-                        <input type="password" id='password' placeholder='Password...' onChange={e => setPassword(e.target.value)}></input>
-                        </div>
-                    </div>
-                </div>
-            </form>
+  return (
+    <div>
+      <nav className=' bg-light d-flex justify-content-center'>
+        <img src={logo} id='logoLogin' className="img-fluid col-4 p-3" alt=""></img>
+      </nav>
+      <form onSubmit={handleSubmit}>
+        <div className='body d-flex justify-content-center'>
+          <div className='d-flex justify-content-center flex-column  text-center mb-4'>
+            <h1>Enter password to login</h1>
+            <div className="mb-3">
+              <input type="password" id='password' placeholder='Password...' onChange={e => setPassword(e.target.value)}></input>
+            </div>
+            {error}
+          </div>
         </div>
-    );
+      </form>
+    </div>
+  );
 }
 
 export default Login;
