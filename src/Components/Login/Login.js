@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useNavigate } from 'react-router-dom';
 import sales from '../Sales';
 import Cookies from 'universal-cookie';
+import dayjs, { Dayjs } from 'dayjs';
 
 const Login = () => {
   const [password, setPassword] = useState();
@@ -13,10 +14,24 @@ const Login = () => {
   const navigate = useNavigate();
   const cookies = new Cookies;
 
+  const time = dayjs();
+
   useEffect(() => {
-    if (cookies.get('token')) {
-      navigate('dashboard');
-    }    
+    (async () => {
+      if (cookies.get('token')) {
+        try {
+          const res = await sales.get(`login?ApiKey=${cookies.get('token')}`);
+          if (res.data.admin == 1) {
+            navigate('admin');
+          } else {
+            navigate(`dashboard/${time.month() + 1}/${time.year()}`);
+          }
+        } catch (error) {
+          cookies.remove('token');
+          console.warn(error.response);
+        }
+      }
+    })();
   }, []);
 
   const handleSubmit = async (event) => {
@@ -28,10 +43,10 @@ const Login = () => {
       if (res.data.admin == 1) {
         navigate('admin');
       } else {
-        navigate('dashboard');
+        navigate(`dashboard/${time.month() + 1}/${time.year()}`);
       }
     } catch (error) {
-      console.warn(error);
+      console.warn(error.response);
       setError(error.response.data.error);
     }
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import sales from '../Sales';
 import Navbar from '../Navbar/Navbar';
-import ReactSpeedometer from "react-d3-speedometer"
+import ReactSpeedometer from "react-d3-speedometer";
 import { Chart } from "react-google-charts";
 import Plot from 'react-plotly.js';
 import './Dashboard.css'
@@ -12,16 +12,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faL, faMedal } from '@fortawesome/free-solid-svg-icons'
 import dayjs, { Dayjs } from 'dayjs';
 import Cookies from 'universal-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Dashboard = () => {
   const cookies = new Cookies;
   const navigate = useNavigate();
 
-  const time = dayjs();
+  const { month, year } = useParams();
 
+  const now = dayjs(`${year}-${month}`).locale('nl').format('MMMM');
+
+  // where i store the data of the responses
   const [teamTarget, setTeamTarget] = useState([]);
-  const [mostSoldProducts, setMostSoldProducts] = useState([]);
   const [bestSeller, setBestSeller] = useState([]);
   const [deals, setDeals] = useState([]);
   const [existantDeals, setExistantDeals] = useState([]);
@@ -58,7 +60,6 @@ const Dashboard = () => {
       ]);
   
       setTeamTarget(teamTargetResponse.data);
-      setMostSoldProducts(mostSoldProductsResponse.data);
       setBestSeller(bestSellerResponse.data);
       setDeals(dealsResponse.data);
       setExistantDeals(existantDealsResponse.data);
@@ -84,7 +85,6 @@ const Dashboard = () => {
       // most sold products
       names = [];
       totalPrices = [];
-      console.log(mostSoldProductsResponse.data)
       mostSoldProductsResponse.data.forEach(product => {
         names = [`${product.name} <br> € ${product.totalPrice}`, ...names];
         totalPrices = [product.totalPrice, ...totalPrices];
@@ -104,21 +104,28 @@ const Dashboard = () => {
 
       setIsLoading(false);
     } catch (error) {
-      console.warn(error)
+      console.warn(error.response);
       cookies.remove('token');
       navigate('/');
     }
   }
 
+  const MINUTE_MS = 60000;
+
   useEffect(() => {
     if (cookies.get('token')) {
-      fetchAll(time.month() + 1, time.year())
+      fetchAll(month, year); // First fetch
+
+      const interval = setInterval(() => { // Fetches every minute
+        fetchAll(month, year);
+      }, MINUTE_MS);
+
+      return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
     } else {
       navigate('/');
     }
-  }, []);
+  }, [month, year]);
 
-  const now = time.locale('nl').format('MMMM');
 
   const textColor = '#ffffff'
 
@@ -126,7 +133,7 @@ const Dashboard = () => {
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
   
-  const colorsRankList = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
+  // const colorsRankList = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
   
   const rankListData = [{
     x: xRankList,
@@ -134,7 +141,7 @@ const Dashboard = () => {
     type: "bar",
     orientation: "h",
     marker: {
-      color: colorsRankList // specify the colors for each bar
+      // color: colorsRankList // specify the colors for each bar
     },
   }];
   
@@ -153,7 +160,7 @@ const Dashboard = () => {
     displayModeBar: false
   };
   
-  const colorsServices = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
+  // const colorsServices = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
   
   const SoldServicesData = [{
     x: xSoldServicesList,
@@ -161,7 +168,9 @@ const Dashboard = () => {
     type: "bar",
     orientation: "h",
     marker: {
-      color: colorsServices // specify the colors for each bar
+      // startColor: 'rgb(163 103 220)',
+      // endColor: 'rgb(103 183 220)',
+      // color: colorsServices // specify the colors for each bar
     }
   }];
   
@@ -176,14 +185,14 @@ const Dashboard = () => {
     height: 350,
   };
 
-  const colorsBiggestBox = ['rgb(163 103 220)',];
+  // const colorsBiggestBox = ['rgb(163 103 220)'];
   
   const yearRankListBox = [{
     x: xYearRankList,
     y: yYearRankList,
     type: "bar",
     marker: {
-      color: colorsBiggestBox // specify the colors for each bar
+      // color: colorsBiggestBox // specify the colors for each bar
     }
   }];
   
