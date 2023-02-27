@@ -41,7 +41,7 @@ const NewProduct = () => {
     <div className='bg-info vh-100'>
       <div className='container text-center pt-5 w-50'>
         <form onSubmit={handleSubmit} autoCapitalize="true">
-          <h1 className='mb-3'>Nieuwe Product</h1>
+          <h1 className='mb-3'>Nieuw Product</h1>
           {/* name input */}
           <div className='d-flex justify-content-center'>
             <div className="form-floating mb-5 w-50">
