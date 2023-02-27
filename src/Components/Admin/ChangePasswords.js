@@ -10,9 +10,11 @@ const ChangePasswords = () => {
   const cookies = new Cookies();
 
   const [admin, setAdmin] = useState('');
-  const [confirmAdmin, setConfirmAdmin] = useState('');
+  const [oldAdmin, setOldAdmin] = useState('');
   const [user, setUser] = useState('');
-  const [confirmUser, setConfirmUser] = useState('');
+  const [oldUser, setOldUser] = useState('');
+  const [adminError, setAdminError] = useState('');
+  const [userError, setUserError] = useState('');
   
   useEffect(() => {
     (async () => {
@@ -29,27 +31,39 @@ const ChangePasswords = () => {
   const handleAdmin = async (e) => {
     e.preventDefault();
     try {
-      const [changePasswordResponse] = await Promise.all([
-        sales.put(`changePassword?`, {
-          password: admin,
-          confirm: confirmAdmin,
-        }),
-      ]);
+      const res = await sales.put(`changePassword`, {
+        password: admin,
+        oldPassword: oldAdmin,
+      });
 
-      console.log(changePasswordResponse);
+      cookies.set('token', res.data.api_key, {path: '/'});
+      setAdminError(<p className='text-success mb-0 fw-bold'>Wachtwoord successvol geupdate</p>);
     } catch (error) {
       console.warn(error);
-      navigate('/admin');
+      if (error.response.status === 404) {
+        setAdminError(<p className='text-danger mb-0 fw-bold'>Oude wachtwoord is niet correct</p>);
+      } else {
+        navigate('/admin');
+      }
     } 
   }
 
-  const handleUser = async () => {
+  const handleUser = async (e) => {
+    e.preventDefault();
     try {
-      
+      await sales.put(`changePassword`, {
+        password: user,
+        oldPassword: oldUser,
+      });
+      setUserError(<p className='text-success mb-0 fw-bold'>Wachtwoord successvol geupdate</p>);
     } catch (error) {
+      if (error.response.status === 404) {
+        setUserError(<p className='text-danger mb-0 fw-bold'>Oude wachtwoord is niet correct</p>);
+      } else {
+        navigate('/admin');
+      }
       console.warn(error);
-      navigate('/admin');
-    } 
+    }
   }
 
   return (
@@ -59,30 +73,34 @@ const ChangePasswords = () => {
           <form onSubmit={handleAdmin}>
             <h1>Admin Wachtwoord</h1>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" required onChange={e => setAdmin(e.target.value)} placeholder="Nieuw wachtwoord"/>
+              <input type="password" className="form-control" required onChange={e => setAdmin(e.target.value)} placeholder="Nieuw wachtwoord"/>
               <label>Nieuw wachtwoord</label>
             </div>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" required onChange={e => setConfirmAdmin(e.target.value)} placeholder="Voer wachtwoord opnieuw in"/>
-              <label>Voer wachtwoord opnieuw in</label>
+              <input type="password" className="form-control" required onChange={e => setOldAdmin(e.target.value)} placeholder="Het oude wachtwoord"/>
+              <label>Het oude wachtwoord</label>
             </div>
-            <button className='btn btn-success col-12'>Opslaan</button>
+            <div>
+              <button className='btn btn-success col-12'>Opslaan</button>
+              {adminError}
+            </div>
           </form>
         </div>
         <div className='col-6 d-flex flex-column ps-4'>
           <form onSubmit={handleUser}>
             <h1>Gebruikers Wachtwoord</h1>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" required onChange={e => setUser(e.target.value)} placeholder="Nieuw wachtwoord"/>
+              <input type="password" className="form-control" required onChange={e => setUser(e.target.value)} placeholder="Nieuw wachtwoord"/>
               <label>Nieuw wachtwoord</label>
             </div>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" required onChange={e => setConfirmUser(e.target.value)} placeholder="Voer wachtwoord opnieuw in"/>
-              <label>Voer wachtwoord opnieuw in</label>
+              <input type="password" className="form-control" required onChange={e => setOldUser(e.target.value)} placeholder="Het oude wachtwoord"/>
+              <label>Het oude wachtwoord</label>
             </div>
             <div>
               <button className='btn btn-success col-12'>Opslaan</button>
             </div>
+            {userError}
           </form>
         </div>
       </div>
