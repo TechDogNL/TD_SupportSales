@@ -29,7 +29,7 @@ const EditDeal = () => {
         ]);
 
         if (loginResponse.data.admin !== 1) {
-          cookies.remove('token');
+          cookies.remove('token', {path: '/'});
           navigate('/');
         }
         

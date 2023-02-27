@@ -14,12 +14,12 @@ const Users = () => {
   const fetchAll = async () => {
     try {
       const [usersResponse, loginResponse] = await Promise.all([
-        sales.get(`users`),
+        sales.get(`users?filter=true`),
         sales.get(`login?ApiKey=${cookies.get('token')}`),
       ]);
 
       if (loginResponse.data.admin !== 1) {
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/');
       }
 
@@ -36,7 +36,7 @@ const Users = () => {
       setUsers(usersResponse.data)
     } catch (error) {
       console.warn(error);
-      cookies.remove('token');
+      cookies.remove('token', {path: '/'});
       navigate('/');
     }
   }
@@ -78,7 +78,7 @@ const Users = () => {
   
     const deleteUser = async (user_id) => {
       try {
-        const confirmed = window.confirm('WARNING!!! Als je deze gebruiker verwijderd worden ook alle deals van deze gebruiker verwijderd. Deze functie kan NIET ongedaan worden!');
+        const confirmed = window.confirm('WARNING!!! Weet je zeker dat je deze gebruiker wilt verwijderen. Deze functie kan NIET ongedaan worden!');
         if (!confirmed) {
           return;
         }

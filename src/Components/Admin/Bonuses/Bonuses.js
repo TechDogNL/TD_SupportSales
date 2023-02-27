@@ -19,7 +19,7 @@ const Bonuses = () => {
       ]);
 
       if (loginResponse.data.admin !== 1) {
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/');
       }
 
@@ -32,7 +32,7 @@ const Bonuses = () => {
       setBonuses(bonusesResponse.data)
     } catch (error) {
       console.warn(error);
-      cookies.remove('token');
+      cookies.remove('token', {path: '/'});
       navigate('/');
     }
   }
@@ -79,7 +79,7 @@ const Bonuses = () => {
 
     const deleteBonus = async (bonus_id) => {
       try {
-        const confirmed = window.confirm('WARNING!!! Weet je zeker dat je deze bonus wil verwijderen. Deze functie kan NIET ongedaan worden!');
+        const confirmed = window.confirm('WARNING!!! Weet je zeker dat je dit bonus wilt verwijderen. Deze functie kan NIET ongedaan worden!');
         if (!confirmed) {
           return;
         }

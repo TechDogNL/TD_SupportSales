@@ -20,13 +20,13 @@ const NewDeal = () => {
     (async () => {
       try {
         const [usersResponse, productsResponse, loginResponse] = await Promise.all([
-          sales.get(`users`),
-          sales.get(`products`),
+          sales.get(`users?filter=true`),
+          sales.get(`products?filter=true`),
           sales.get(`login?ApiKey=${cookies.get('token')}`),
         ]);
         
         if (loginResponse.data.admin !== 1) {
-          cookies.remove('token');
+          cookies.remove('token', {path: '/'});
           navigate('/');
         }
   
@@ -34,7 +34,7 @@ const NewDeal = () => {
         setProducts(productsResponse.data); 
       } catch (error) {
         console.warn(error);
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/'); 
       }
     })()
@@ -52,6 +52,7 @@ const NewDeal = () => {
         user_id: user.user_id,
         product_id: product.product_id,
         price: e.target[2].value,
+        created_at: e.target[3].value,
         status: dealStatus,
       });
 
@@ -104,6 +105,14 @@ const NewDeal = () => {
                 <input type="number" step="0.01" className="form-control no-spinner" onChange={e => setPrice(e.target.value)} value={price} id="floatingPrice" placeholder="Prijs" required/>
                 <label htmlFor="floatingPrice">Prijs</label>
               </div>
+            </div>
+          </div>
+
+          {/* date input */}
+          <div className='d-flex justify-content-center mb-5'>
+            <div className="form-floating w-50">
+              <input type="datetime-local" className="form-control no-spinner" id="floatingPrice" placeholder="Voor wanneer geld deze bonus" required/>
+              <label htmlFor="floatingPrice">Wanner is deze deal gemaakt?</label>
             </div>
           </div>
 

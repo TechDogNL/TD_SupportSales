@@ -25,14 +25,14 @@ const HomePage = () => {
         }
       } catch (error) {
         console.warn(error.response);
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/');
       }
     })();
   }, []);
 
   const logout = () => {
-    cookies.remove('token');
+    cookies.remove('token', {path: '/'});
     navigate('/');
   }
 

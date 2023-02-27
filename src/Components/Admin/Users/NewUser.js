@@ -16,7 +16,7 @@ const NewUser = () => {
         await sales.get(`login?ApiKey=${cookies.get('token')}`);
       } catch (error) {
         console.warn(error);
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/'); 
       }
     })()
@@ -28,6 +28,7 @@ const NewUser = () => {
     try {
       await sales.post('users', {
         name: e.target[0].value,
+        active: 1,
       });
 
       setError(<p className='text-success fw-bold'>Gebruiker succesvol aangemaakt</p>);

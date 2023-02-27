@@ -32,7 +32,7 @@ const Login = () => {
             navigate(`dashboard/${time.month() + 1}/${time.year()}`);
           }
         } catch (error) {
-          cookies.remove('token');
+          cookies.remove('token', {path: '/'});
           console.warn(error.response);
         }
       }

@@ -12,14 +12,14 @@ const Products = () => {
   const [error, setError] = useState('');
 
   const fetchAll = async () => {
-    try {
+    // try {
       const [productsResponse, loginResponse] = await Promise.all([
-        sales.get(`products`),
+        sales.get(`products?filter=true`),
         sales.get(`login?ApiKey=${cookies.get('token')}`),
       ]);
 
       if (loginResponse.data.admin !== 1) {
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/');
       }
 
@@ -34,11 +34,11 @@ const Products = () => {
       });
 
       setProducts(productsResponse.data)
-    } catch (error) {
-      console.warn(error);
-      cookies.remove('token');
-      navigate('/');
-    }
+    // } catch (error) {
+    //   console.warn(error);
+    //   cookies.remove('token', {path: '/'});
+    //   navigate('/');
+    // }
   }
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const Products = () => {
   
     const deleteProduct = async (product_id) => {
       try {
-        const confirmed = window.confirm('WARNING!!! Als je dit product verwijderd worden ook alle deals van dit product verwijderd. Deze functie kan NIET ongedaan worden!');
+        const confirmed = window.confirm('WARNING!!! Weet je zeker dat je dit product wilt verwijderen. Deze functie kan NIET ongedaan worden!');
         if (!confirmed) {
           return;
         }

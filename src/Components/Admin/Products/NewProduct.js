@@ -15,8 +15,8 @@ const NewProduct = () => {
         await sales.get(`login?ApiKey=${cookies.get('token')}`);
       } catch (error) {
         console.warn(error);
-        cookies.remove('token');
-        navigate('/'); 
+        cookies.remove('token', {path: '/'});
+        navigate('/');
       }
     })()
   }, []);
@@ -28,6 +28,7 @@ const NewProduct = () => {
       await sales.post('products', {
         name: e.target[0].value,
         price: e.target[1].value,
+        active: 1,
       });
 
       setError(<p className='text-success fw-bold'>Product succesvol aangemaakt</p>);
@@ -40,7 +41,7 @@ const NewProduct = () => {
   return (
     <div className='bg-info vh-100'>
       <div className='container text-center pt-5 w-50'>
-        <form onSubmit={handleSubmit} autoCapitalize="true">
+        <form onSubmit={handleSubmit}>
           <h1 className='mb-3'>Nieuw Product</h1>
           {/* name input */}
           <div className='d-flex justify-content-center'>

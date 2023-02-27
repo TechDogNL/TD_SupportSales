@@ -15,7 +15,7 @@ const NewBonus = () => {
         await sales.get(`login?ApiKey=${cookies.get('token')}`);
       } catch (error) {
         console.warn(error);
-        cookies.remove('token');
+        cookies.remove('token', {path: '/'});
         navigate('/');
       }
     })()
