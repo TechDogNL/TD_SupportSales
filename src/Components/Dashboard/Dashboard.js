@@ -227,10 +227,11 @@ const Dashboard = () => {
               </div>
             </div>
             <div className='bigbox col-5 m-2 rounded-2'>
-              <div className='my-3  d-flex justify-content-center'>
+              <div className='my-3  d-flex justify-content-center flex-column text-center'>
                 <h4 id='teamTarget'>Team target van { capitalize(now) }</h4>
+                <p>Target: € {teamTarget.amount}</p>
               </div>
-              <div className='speedoMeter d-flex p-4 justify-content-evenly'>
+              <div className='speedoMeter d-flex p-4 pt-0 justify-content-evenly'>
                 <div className='d-flex justify-content-center flex-column align-content-between'>
                   <p className='current '>Bedrag: € {totalPrice}</p>
                   <p className='toGo'>Te gaan: € {(teamTarget.amount - totalPrice).toFixed(2)}</p>
