@@ -101,7 +101,7 @@ const NewDeal = () => {
             <div className="input-group mb-3 w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
-                <input type="text" className="form-control no-spinner" onChange={e => setPrice(e.target.value)} value={price} id="floatingPrice" placeholder="Prijs" required/>
+                <input type="number" step="0.01" className="form-control no-spinner" onChange={e => setPrice(e.target.value)} value={price} id="floatingPrice" placeholder="Prijs" required/>
                 <label htmlFor="floatingPrice">Prijs</label>
               </div>
             </div>

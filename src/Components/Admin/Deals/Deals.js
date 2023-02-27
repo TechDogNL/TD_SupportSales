@@ -134,7 +134,7 @@ const Deals = () => {
                 <tr key={deal.deal_id}>
                   <td>{user(deal.user_id)}</td>
                   <td>{product(deal)}</td>
-                  <td>{deal.price}</td>
+                  <td>€ {deal.price.toString().replace('.', ',')}</td>
                   <td>{status(deal.status)}</td>
                   <td>{deal.created_at}</td>
                   <td><p onClick={e => navigate(`/admin/deals/${deal.deal_id}`)} className='btn btn-primary'>Aanpassen</p></td>

@@ -55,7 +55,7 @@ const NewProduct = () => {
             <div className="input-group w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
-                <input type="number" className="form-control no-spinner" id="floatingPrice" placeholder="Prijs" required/>
+                <input type="number" step="0.01" className="form-control no-spinner" id="floatingPrice" placeholder="Prijs" required/>
                 <label htmlFor="floatingPrice">Prijs</label>
               </div>
             </div>

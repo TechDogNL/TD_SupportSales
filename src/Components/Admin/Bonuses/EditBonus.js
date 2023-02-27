@@ -65,7 +65,7 @@ const EditBonus = () => {
             <div className="input-group w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
-                <input type="number" onChange={handleChange} value={bonus.amount} name='amount' className="form-control no-spinner" id="floatingPrice" placeholder="Bedrag dat moet worden gehaald" required/>
+                <input type="number" step="0.01" onChange={handleChange} value={bonus.amount} name='amount' className="form-control no-spinner" id="floatingPrice" placeholder="Bedrag dat moet worden gehaald" required/>
                 <label htmlFor="floatingPrice">Bedrag dat moet worden gehaald</label>
               </div>
             </div>

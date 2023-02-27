@@ -84,7 +84,7 @@ const Bonuses = () => {
           return;
         }
 
-        await sales.delete(`bonuse?bonus_id=${bonus_id}`);
+        await sales.delete(`bonuses?bonus_id=${bonus_id}`);
         setError(<p className='text-success fw-bold'>Bonus is succesvol verwijderd</p>)
         fetchAll();
       } catch (error) {
@@ -110,7 +110,7 @@ const Bonuses = () => {
               {itemsToShow.map((bonus) => (
                 <tr key={bonus.bonus_id}>
                   <td>{date(bonus.date)}</td>
-                  <td>{bonus.amount}</td>
+                  <td>€ {bonus.amount.toString().replace('.', ',')}</td>
                   <td>{bonus.text}</td>
                   <td><p onClick={e => navigate(`/admin/bonuses/${bonus.bonus_id}`)} className='btn btn-primary'>Aanpassen</p></td>
                   <td><p onClick={e => deleteBonus(bonus.bonus_id)} className='btn btn-danger'>Verwijder</p></td>
