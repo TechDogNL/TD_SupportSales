@@ -22,7 +22,6 @@ const Dashboard = () => {
 
   const now = dayjs(`${year}-${month}`).locale('nl').format('MMMM');
 
-  // where i store the data of the responses
   const [teamTarget, setTeamTarget] = useState([]);
   const [bestSeller, setBestSeller] = useState([]);
   const [deals, setDeals] = useState([]);
@@ -237,7 +236,7 @@ const Dashboard = () => {
             <div className='bigbox col-5 m-2 rounded-2'>
               <div className='my-3  d-flex justify-content-center flex-column text-center'>
                 <h4 id='teamTarget'>Team target van { capitalize(now) }</h4>
-                <p>Target: € {teamTarget.amount}</p>
+                <p className='fw-bold'>Target: € {teamTarget.amount}</p>
               </div>
               <div className='speedoMeter d-flex p-4 pt-0 justify-content-evenly'>
                 <div className='d-flex justify-content-center flex-column align-content-between'>
@@ -255,7 +254,7 @@ const Dashboard = () => {
                     labelFontSize={'0'}
                     startColor={'#67b7dc'}
                     endColor={'#dc67ce'}
-                    value={totalPrice}
+                    value={teamTarget.amount ? totalPrice : 0}
                     textColor={textColor}
                   />
                 </div>
