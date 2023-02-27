@@ -54,9 +54,9 @@ const Dashboard = () => {
         sales.get(`mostSoldProducts?month=${month}&year=${year}`),
         sales.get(`yearRankList?month=${month}&year=${year}`),
         sales.get(`bestSeller?month=${month - 1}&year=${year}`),
-        sales.get(`deals?month=${month - 1}&year=${year}`),
-        sales.get(`deals?month=${month}&year=${year}&status=0`),
-        sales.get(`deals?month=${month}&year=${year}&status=1`),
+        sales.get(`getDeals?month=${month - 1}&year=${year}`),
+        sales.get(`getDeals?month=${month}&year=${year}&status=0`),
+        sales.get(`getDeals?month=${month}&year=${year}&status=1`),
       ]);
   
       setTeamTarget(teamTargetResponse.data);

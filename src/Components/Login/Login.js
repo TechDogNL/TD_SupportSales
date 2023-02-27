@@ -16,6 +16,11 @@ const Login = () => {
 
   const time = dayjs();
 
+  const options = {
+    path: '/',
+    maxAge: 48000 * 48000, // valid for a bit longer than 1 year
+  }
+
   useEffect(() => {
     (async () => {
       if (cookies.get('token')) {
@@ -38,8 +43,7 @@ const Login = () => {
     event.preventDefault();
     try {
       const res = await sales.get(`login?password=${event.target.password.value}`);
-      setError('');
-      cookies.set('token', res.data.ApiKey);
+      cookies.set('token', res.data.ApiKey, options);
       if (res.data.admin == 1) {
         navigate('admin');
       } else {
