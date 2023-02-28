@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [existantDeals, setExistantDeals] = useState([]);
   const [newDeals, setNewDeals] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [xRankList, setXRankList] = useState([]);
   const [yRankList, setYRankList] = useState([]);
@@ -74,6 +75,7 @@ const Dashboard = () => {
       setXRankList(totalPrices);
       setYRankList(names);
 
+      setAmount(rankListResponse.data[1])
       // team target
       if (teamTargetResponse.data.amount < rankListResponse.data[1]) {
         setTotalPrice(teamTargetResponse.data.amount);
@@ -240,8 +242,8 @@ const Dashboard = () => {
               </div>
               <div className='speedoMeter d-flex p-4 pt-0 justify-content-evenly'>
                 <div className='d-flex justify-content-center flex-column align-content-between'>
-                  <p className='current '>Bedrag: € {checkIfInteger(totalPrice)}</p>
-                  <p className='toGo'>Te gaan: € {checkIfInteger(teamTarget.amount - totalPrice)}</p>
+                  <p className='current '>Bedrag: € {checkIfInteger(amount)}</p>
+                  <p className='toGo'>Te gaan: € {teamTarget.amount ? checkIfInteger(teamTarget.amount - totalPrice) : 0}</p>
                 </div>
                 <div>
                   <ReactSpeedometer
