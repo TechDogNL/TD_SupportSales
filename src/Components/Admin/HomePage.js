@@ -37,7 +37,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container d-flex flex-row text-center pt-5 mb-5 align-items-center'>
         <div className='col-3 d-flex flex-column'>
           <h1>Deals</h1>

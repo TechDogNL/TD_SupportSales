@@ -181,7 +181,7 @@ const Deals = () => {
   };
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container pt-5'>
         <DealsTable/>
       </div>

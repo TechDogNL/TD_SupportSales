@@ -76,9 +76,9 @@ const EditDeal = () => {
   }
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete='off'>
           <h1 className='mb-3'>Nieuwe Deal</h1>
           {/* dropdowns */}
           <div className='d-flex justify-content-center mb-5'>

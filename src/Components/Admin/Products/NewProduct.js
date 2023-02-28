@@ -39,7 +39,7 @@ const NewProduct = () => {
   }
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
         <form onSubmit={handleSubmit}>
           <h1 className='mb-3'>Nieuw Product</h1>
@@ -56,7 +56,7 @@ const NewProduct = () => {
             <div className="input-group w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
-                <input type="number" step="0.01" className="form-control no-spinner" id="floatingPrice" placeholder="Prijs" required/>
+                <input type="number" step="0.01" className="form-control no-spinner" id="floatingPrice" placeholder="Prijs"/>
                 <label htmlFor="floatingPrice">Prijs</label>
               </div>
             </div>

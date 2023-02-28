@@ -65,13 +65,15 @@ const NewDeal = () => {
 
   const handlePrice = (product) => {
     setProduct(product);
-    setPrice(product.price);
+    if (product.price) {
+      setPrice(product.price);
+    }
   }
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete='off'>
           <h1 className='mb-3'>Nieuwe Deal</h1>
           {/* dropdowns */}
           <div className='d-flex justify-content-center mb-5'>
@@ -111,7 +113,7 @@ const NewDeal = () => {
           {/* date input */}
           <div className='d-flex justify-content-center mb-5'>
             <div className="form-floating w-50">
-              <input type="datetime-local" className="form-control no-spinner" id="floatingPrice" placeholder="Voor wanneer geld deze bonus" required/>
+              <input type="date" className="form-control no-spinner" id="floatingPrice" placeholder="Voor wanneer geld deze bonus" required/>
               <label htmlFor="floatingPrice">Wanner is deze deal gemaakt?</label>
             </div>
           </div>

@@ -67,10 +67,10 @@ const ChangePasswords = () => {
   }
 
   return (
-    <div className='bg-info vh-100'>
+    <div className='adminBody vh-100'>
       <div className='container d-flex flex-row text-center mb-5 pt-5 align-items-center'>
         <div className='col-6 d-flex flex-column pe-4'>
-          <form onSubmit={handleAdmin}>
+          <form onSubmit={handleAdmin} autoComplete='off'>
             <h1>Admin Wachtwoord</h1>
             <div className="form-floating mb-3">
               <input type="password" className="form-control" required onChange={e => setAdmin(e.target.value)} placeholder="Nieuw wachtwoord"/>
@@ -87,7 +87,7 @@ const ChangePasswords = () => {
           </form>
         </div>
         <div className='col-6 d-flex flex-column ps-4'>
-          <form onSubmit={handleUser}>
+          <form onSubmit={handleUser} autoComplete='off'>
             <h1>Gebruikers Wachtwoord</h1>
             <div className="form-floating mb-3">
               <input type="password" className="form-control" required onChange={e => setUser(e.target.value)} placeholder="Nieuw wachtwoord"/>
