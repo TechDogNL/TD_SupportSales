@@ -41,28 +41,28 @@ const HomePage = () => {
       <div className='container d-flex flex-row text-center pt-5 mb-5 align-items-center'>
         <div className='col-3 d-flex flex-column'>
           <h1>Deals</h1>
-          <a className='fw-bold mb-3 hover-link' onClick={e => navigate('/admin/deals')}>Alle deals inzien</a>
-          <a className='fw-bold hover-link' onClick={e => navigate('/admin/deals/new')}>Nieuwe deal</a>
+          <a className='fw-bold mb-3 hover-link link-dark' onClick={e => navigate('/admin/deals')}>Alle deals inzien</a>
+          <a className='fw-bold hover-link link-dark' onClick={e => navigate('/admin/deals/new')}>Nieuwe deal</a>
         </div>
         <div className='col-3 d-flex flex-column'>
           <h1>Gebruikers</h1>
-          <a className='fw-bold mb-3 hover-link' onClick={e => navigate('/admin/users')}>Alle gebruikers inzien</a>
-          <a className='fw-bold hover-link' onClick={e => navigate('/admin/users/new')}>Nieuwe gebruiker</a>
+          <a className='fw-bold mb-3 hover-link link-dark' onClick={e => navigate('/admin/users')}>Alle gebruikers inzien</a>
+          <a className='fw-bold hover-link link-dark' onClick={e => navigate('/admin/users/new')}>Nieuwe gebruiker</a>
         </div>
         <div className='col-3 d-flex flex-column'>
           <h1>Producten</h1>
-          <a className='fw-bold mb-3 hover-link' onClick={e => navigate('/admin/products')}>Alle producten inzien</a>
-          <a className='fw-bold hover-link' onClick={e => navigate('/admin/products/new')}>Nieuw product</a>
+          <a className='fw-bold mb-3 hover-link link-dark' onClick={e => navigate('/admin/products')}>Alle producten inzien</a>
+          <a className='fw-bold hover-link link-dark' onClick={e => navigate('/admin/products/new')}>Nieuw product</a>
         </div>
         <div className='col-3 d-flex flex-column'>
           <h1>Bonuses</h1>
-          <a className='fw-bold mb-3 hover-link' onClick={e => navigate('/admin/bonuses')}>Alle bonuses inzien</a>
-          <a className='fw-bold hover-link' onClick={e => navigate('/admin/bonuses/new')}>Nieuwe bonus</a>
+          <a className='fw-bold mb-3 hover-link link-dark' onClick={e => navigate('/admin/bonuses')}>Alle bonuses inzien</a>
+          <a className='fw-bold hover-link link-dark' onClick={e => navigate('/admin/bonuses/new')}>Nieuwe bonus</a>
         </div>
       </div>
       <div className='text-center'>
         <p onClick={logout} className='btn btn-danger'>Uitloggen</p>
-        <a className='fw-bold ms-3 hover-link' onClick={e => navigate('/admin/changePasswords')}>Wachtwoorden aanpassen</a>
+        <a className='fw-bold ms-3 hover-link link-dark' onClick={e => navigate('/admin/changePasswords')}>Wachtwoorden aanpassen</a>
       </div>
     </div>
   );
