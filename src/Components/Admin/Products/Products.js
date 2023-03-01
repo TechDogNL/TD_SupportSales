@@ -108,7 +108,7 @@ const Products = () => {
               {itemsToShow.map((product) => (
                 <tr key={product.product_id}>
                   <td>{product.name}</td>
-                  <td>€ {product.price.toString().replace('.', ',')}</td>
+                  <td>{product.price ? `€ ${product.price.toFixed(2).toString().replace('.', ',')}` : ''}</td>
                   <td><p onClick={e => navigate(`/admin/products/${product.product_id}`)} className='btn btn-primary'>Aanpassen</p></td>
                   <td><p onClick={e => deleteProduct(product.product_id)} className='btn btn-danger'>Verwijder</p></td>
                 </tr>

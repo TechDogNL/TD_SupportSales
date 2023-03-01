@@ -13,6 +13,16 @@ const EditProduct = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
+
+  useEffect(() => {
     (async () => {
       try {
         const [productResponse, loginResponse] = await Promise.all([
@@ -24,8 +34,10 @@ const EditProduct = () => {
           cookies.remove('token', {path: '/'});
           navigate('/');
         }
+
+        const price = productResponse.data.price;
         
-        productResponse.data.price = productResponse.data.price.toString().replace('.', ',')
+        price ? productResponse.data.price = price.toString().replace('.', ',') : productResponse.data.price = '';
         setProduct(productResponse.data);
       } catch (error) {
         console.warn(error);
@@ -59,7 +71,7 @@ const EditProduct = () => {
     <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
         <form onSubmit={handleSubmit} autoComplete='off'>
-          <h1 className='mb-3'>Nieuwe Product</h1>
+          <h1 className='mb-3'>Product aanpassen</h1>
           {/* name input */}
           <div className='d-flex justify-content-center'>
             <div className="form-floating mb-5 w-50">
@@ -73,7 +85,7 @@ const EditProduct = () => {
             <div className="input-group w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
-                <input type="text" onChange={handleChange} value={product.price} name='price' className="form-control no-spinner" id="floatingPrice" placeholder="Prijs" required/>
+                <input type="text" onChange={handleChange} value={product.price} name='price' className="form-control no-spinner" id="floatingPrice" placeholder="Prijs"/>
                 <label htmlFor="floatingPrice">Prijs</label>
               </div>
             </div>

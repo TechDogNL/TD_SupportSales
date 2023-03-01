@@ -13,6 +13,16 @@ const EditUser = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
+
+  useEffect(() => {
     (async () => {
       try {
         const [userResponse, loginResponse] = await Promise.all([
@@ -53,7 +63,7 @@ const EditUser = () => {
     <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
         <form onSubmit={handleSubmit} autoComplete='off'>
-          <h1 className='mb-3'>Nieuwe Gebruiker</h1>
+          <h1 className='mb-3'>Gebruiker aanpassen</h1>
           {/* name input */}
           <div className='d-flex justify-content-center'>
             <div className="form-floating mb-5 w-50">

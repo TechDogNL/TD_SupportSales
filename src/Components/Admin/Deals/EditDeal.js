@@ -14,9 +14,21 @@ const EditDeal = () => {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({name: 'Kies een gebruiker'});
   const [product, setProduct] = useState({name: 'Kies een product'});
+  const [date, setDate] = useState('');
+  const [business, setBusiness] = useState('');
   const [dealStatus, setDealStatus] = useState(0);
   const [price, setPrice] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
 
   useEffect(() => {
     (async () => {
@@ -40,6 +52,8 @@ const EditDeal = () => {
         setProduct(productsResponse.data.find(product => product.product_id === deal.product_id))
         setPrice(deal.price);
         setDealStatus(deal.status);
+        setDate(deal.created_at);
+        setBusiness(deal.business);
       } catch (error) {
         console.warn(error);
         navigate('/admin/deals');
@@ -59,7 +73,9 @@ const EditDeal = () => {
         deal_id: id,
         user_id: user.user_id,
         product_id: product.product_id,
-        price: e.target[2].value,
+        price: e.target[2].value.replace(',', '.'),
+        created_at: e.target[3].value,
+        business: e.target[4].value,
         status: dealStatus,
       });
 
@@ -72,14 +88,16 @@ const EditDeal = () => {
 
   const handlePrice = (product) => {
     setProduct(product);
-    setPrice(product.price);
+    if (product.price) {
+      setPrice(product.price);
+    }
   }
 
   return (
     <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
         <form onSubmit={handleSubmit} autoComplete='off'>
-          <h1 className='mb-3'>Nieuwe Deal</h1>
+          <h1 className='mb-3'>Deal aanpassen</h1>
           {/* dropdowns */}
           <div className='d-flex justify-content-center mb-5'>
             <div className="dropdown pe-2">
@@ -115,6 +133,21 @@ const EditDeal = () => {
             </div>
           </div>
 
+          {/* date input */}
+          <div className='d-flex justify-content-center mb-3'>
+            <div className="form-floating w-50">
+              <input type="date" className="form-control no-spinner" onChange={e => setDate(e.target.value)} value={date} id="floatingPrice" placeholder="Wanner is deze deal gemaakt?" required/>
+              <label htmlFor="floatingPrice">Wanner is deze deal gemaakt?</label>
+            </div>
+          </div>
+
+          {/* business input */}
+          <div className='d-flex justify-content-center mb-5'>
+            <div className="form-floating w-50">
+              <input type="text" className="form-control no-spinner" onChange={e => setBusiness(e.target.value)} value={business} id="floatingPrice" placeholder="Bedrijf" required/>
+              <label htmlFor="floatingPrice">Bedrijf</label>
+            </div>
+          </div>
           
           {/* radio buttons */}
           <div className="form-check form-check-inline mb-5">

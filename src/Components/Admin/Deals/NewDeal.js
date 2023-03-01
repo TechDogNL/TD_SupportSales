@@ -17,6 +17,16 @@ const NewDeal = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
+  
+  useEffect(() => {
     (async () => {
       try {
         const [usersResponse, productsResponse, loginResponse] = await Promise.all([
@@ -54,7 +64,16 @@ const NewDeal = () => {
         price: e.target[2].value,
         created_at: e.target[3].value,
         status: dealStatus,
+        business: e.target[4].value,
       });
+
+      // sets all the data empty
+      setUser({name: 'Kies een gebruiker'});
+      setProduct({name: 'Kies een product'});
+      setPrice('');
+      e.target[3].value = '';
+      e.target[4].value = '';
+      setDealStatus(0);
 
       setError(<p className='text-success fw-bold'>Deal succesvol aangemaakt</p>);
     } catch (error) {
@@ -81,7 +100,7 @@ const NewDeal = () => {
               <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {user.name}
               </button>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu scrollable-menu">
                 {users.map(user => (
                   <li key={user.user_id}><a className="dropdown-item" onClick={e => setUser(user)}>{user.name}</a></li>
               ))}
@@ -100,8 +119,8 @@ const NewDeal = () => {
           </div>
 
           {/* price input */}
-          <div className='d-flex justify-content-center'>
-            <div className="input-group mb-3 w-50">
+          <div className='d-flex justify-content-center mb-3'>
+            <div className="input-group w-50">
               <span className="input-group-text" id="basic-addon1">€</span>
               <div className="form-floating">
                 <input type="number" step="0.01" className="form-control no-spinner" onChange={e => setPrice(e.target.value)} value={price} id="floatingPrice" placeholder="Prijs" required/>
@@ -111,13 +130,20 @@ const NewDeal = () => {
           </div>
 
           {/* date input */}
-          <div className='d-flex justify-content-center mb-5'>
+          <div className='d-flex justify-content-center mb-3'>
             <div className="form-floating w-50">
-              <input type="date" className="form-control no-spinner" id="floatingPrice" placeholder="Voor wanneer geld deze bonus" required/>
+              <input type="date" className="form-control no-spinner" id="floatingPrice" placeholder="Wanner is deze deal gemaakt?" required/>
               <label htmlFor="floatingPrice">Wanner is deze deal gemaakt?</label>
             </div>
           </div>
 
+          {/* business input */}
+          <div className='d-flex justify-content-center mb-5'>
+            <div className="form-floating w-50">
+              <input type="text" className="form-control no-spinner" id="floatingPrice" placeholder="Bedrijf" required/>
+              <label htmlFor="floatingPrice">Bedrijf</label>
+            </div>
+          </div>
           
           {/* radio buttons */}
           <div className="form-check form-check-inline mb-5">

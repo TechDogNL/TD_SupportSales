@@ -11,6 +11,16 @@ const NewUser = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
+
+  useEffect(() => {
     (async () => {
       try {
         await sales.get(`login?ApiKey=${cookies.get('token')}`);
@@ -30,6 +40,9 @@ const NewUser = () => {
         name: e.target[0].value,
         active: 1,
       });
+
+      // sets all the data empty after the user is made
+      e.target[0].value = '';
 
       setError(<p className='text-success fw-bold'>Gebruiker succesvol aangemaakt</p>);
     } catch (error) {

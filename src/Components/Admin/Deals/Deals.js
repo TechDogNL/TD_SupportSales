@@ -125,6 +125,7 @@ const Deals = () => {
                 <th>Price</th>
                 <th>Status</th>
                 <th>Datum aangemaakt</th>
+                <th>Bedrijf</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -134,9 +135,10 @@ const Deals = () => {
                 <tr key={deal.deal_id}>
                   <td>{user(deal.user_id)}</td>
                   <td>{product(deal)}</td>
-                  <td>€ {deal.price.toString().replace('.', ',')}</td>
+                  <td>€ {deal.price.toFixed(2).toString().replace('.', ',')}</td>
                   <td>{status(deal.status)}</td>
                   <td>{deal.created_at}</td>
+                  <td>{deal.business}</td>
                   <td><p onClick={e => navigate(`/admin/deals/${deal.deal_id}`)} className='btn btn-primary'>Aanpassen</p></td>
                   <td><p onClick={e => deleteDeal(deal.deal_id)} className='btn btn-danger'>Verwijder</p></td>
                 </tr>

@@ -10,6 +10,16 @@ const NewProduct = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setError('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [error]);
+
+  useEffect(() => {
     (async () => {
       try {
         await sales.get(`login?ApiKey=${cookies.get('token')}`);
@@ -41,7 +51,7 @@ const NewProduct = () => {
   return (
     <div className='adminBody vh-100'>
       <div className='container text-center pt-5 w-50'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete='off'>
           <h1 className='mb-3'>Nieuw Product</h1>
           {/* name input */}
           <div className='d-flex justify-content-center'>
