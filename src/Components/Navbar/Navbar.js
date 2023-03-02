@@ -12,9 +12,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useParams } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 const Navbar = () => {
   const { month, year } = useParams();
+  const cookies = new Cookies();
 
   const now = dayjs(`${year}-${month}`).locale('nl');
 
@@ -29,12 +31,18 @@ const Navbar = () => {
   function capitalize(month) {
     return month.charAt(0).toUpperCase() + month.slice(1);
   }
+
+  const logOut = () => {
+    cookies.remove('token', {path: '/'});
+    navigate('/');
+  }
   
   return (
     <div>
       <nav className="navbar navbar-light bg-white">
         <div className="container-fluid d-flex justify-content-center p-0 mt-0">
           <div className='col-3'>
+            <button className="myButton w-100 h-100" onClick={logOut}>Uitloggen</button>
           </div>
           <div className='col-6 d-flex justify-content-center'>
             <img src={logo} id='logoNav' className="img-fluid" alt=""></img>

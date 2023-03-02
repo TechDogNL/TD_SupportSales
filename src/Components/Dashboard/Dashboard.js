@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import sales from '../Sales';
 import Navbar from '../Navbar/Navbar';
 import ReactSpeedometer from "react-d3-speedometer";
-import { Chart } from "react-google-charts";
 import Plot from 'react-plotly.js';
 import './Dashboard.css'
 import './ChartStyles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faL, faMedal } from '@fortawesome/free-solid-svg-icons'
-import dayjs, { Dayjs } from 'dayjs';
+import { faMedal } from '@fortawesome/free-solid-svg-icons'
+import dayjs from 'dayjs';
 import Cookies from 'universal-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -30,10 +29,8 @@ const Dashboard = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [xRankList, setXRankList] = useState([]);
-  const [yRankList, setYRankList] = useState([]);
-  const [xSoldServicesList, setXSoldServicesList] = useState([]);
-  const [ySoldServicesList, setYSoldServicesList] = useState([]);
+  const [rankList, setRankList] = useState([]);
+  const [soldServices, setSoldServices] = useState([]);
   const [xYearRankList, setXYearRankList] = useState([]);
   const [yYearRankList, setYYearRankList] = useState([]);
   
@@ -58,7 +55,9 @@ const Dashboard = () => {
         sales.get(`getDeals?month=${month}&year=${year}&status=0`),
         sales.get(`getDeals?month=${month}&year=${year}&status=1`),
       ]);
-  
+      
+      setSoldServices(mostSoldProductsResponse.data)
+      setRankList(rankListResponse.data[0]);
       setTeamTarget(teamTargetResponse.data);
       setBestSeller(bestSellerResponse.data);
       setDeals(dealsResponse.data);
@@ -68,13 +67,6 @@ const Dashboard = () => {
       // ranklist
       let names = [];
       let totalPrices = [];
-      rankListResponse.data[0].forEach(user => {
-        names = [`${user.name} <br> € ${user.totalPrice}`, ...names];
-        totalPrices = [user.totalPrice, ...totalPrices];
-      });
-      setXRankList(totalPrices);
-      setYRankList(names);
-
       setAmount(rankListResponse.data[1])
       // team target
       if (teamTargetResponse.data.amount < rankListResponse.data[1]) {
@@ -82,16 +74,6 @@ const Dashboard = () => {
       } else {
         setTotalPrice(rankListResponse.data[1]);
       }
-
-      // most sold products
-      names = [];
-      totalPrices = [];
-      mostSoldProductsResponse.data.forEach(product => {
-        names = [`${product.name} <br> € ${product.totalPrice}`, ...names];
-        totalPrices = [product.totalPrice, ...totalPrices];
-      });
-      setXSoldServicesList(totalPrices);
-      setYSoldServicesList(names);
 
       // year ranklist
       names = [];
@@ -142,59 +124,9 @@ const Dashboard = () => {
     }
   }
   
-  // const colorsRankList = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
-  
-  const rankListData = [{
-    x: xRankList,
-    y: yRankList,
-    type: "bar",
-    orientation: "h",
-    marker: {
-      // color: colorsRankList // specify the colors for each bar
-    },
-  }];
-  
-  const rankListLayout = {
-    title: "",
-    xaxis: {
-      title: ""
-    },
-    yaxis: {
-      title: ""
-    },
-    height: 350,
-  };
-  
   const config = {
     displayModeBar: false
   };
-  
-  // const colorsServices = ['rgb(163 103 220)', 'rgb(103 183 220)', 'rgb(166 221 242)', 'rgb(199 103 220)', 'rgb(163 103 220)'];
-  
-  const SoldServicesData = [{
-    x: xSoldServicesList,
-    y: ySoldServicesList,
-    type: "bar",
-    orientation: "h",
-    marker: {
-      // startColor: 'rgb(163 103 220)',
-      // endColor: 'rgb(103 183 220)',
-      // color: colorsServices // specify the colors for each bar
-    }
-  }];
-  
-  const SoldServicesLayout = {
-    title: "",
-    xaxis: {
-      title: ""
-    },
-    yaxis: {
-      title: ""
-    },
-    height: 350,
-  };
-
-  // const colorsBiggestBox = ['rgb(163 103 220)'];
   
   const yearRankListBox = [{
     x: xYearRankList,
@@ -216,6 +148,101 @@ const Dashboard = () => {
     height: 300,
   };
 
+  const MIN_BAR_WIDTH = 40;
+  const maxDataRanklist = Math.max(...rankList.map((d) => d.totalPrice));
+  const maxDataServices = Math.max(...soldServices.map((d) => d.totalPrice));
+  const chartWidth = 275;
+  const chartHeight = 200;
+  const barHeightRanklist = chartHeight / rankList.length;
+  const barHeightServices = chartHeight / soldServices.length;
+  const barPadding = 0.5;
+
+  const RanklistChart = () => {
+    return (
+      <svg width={chartWidth} height={chartHeight}>
+        {rankList.map((d, i) => (
+          <g key={i}>
+            <text
+              x={5}
+              y={i * (barHeightRanklist + barPadding) + barHeightRanklist / 2 + 0}
+              alignmentBaseline="middle"
+              style={{ fontWeight: "bold" }}
+            >
+              <tspan
+                key={d.name}
+                x={5}
+                style={{ whiteSpace: "pre", fontSize: d.name.length > 10 ? "10px" : "9px" }}
+              >
+                {d.name.length > 14 ? `${d.name.slice(0, 12)}...` : d.name}
+              </tspan>
+            </text>
+            <rect
+              x={80}
+              y={i * (barHeightRanklist + barPadding) + barPadding / 2}
+              width={Math.max(MIN_BAR_WIDTH, (d.totalPrice / maxDataRanklist) * (chartWidth - 80) + MIN_BAR_WIDTH)}
+              height={barHeightRanklist}
+              fill="#69b3a2"
+              style={{ minWidth: '40px' }}
+            />
+            <text
+              x={85}
+              y={i * (barHeightRanklist + barPadding) + barHeightRanklist / 2 + 0}
+              alignmentBaseline="middle"
+              fill="#FFFFFF"
+              fontSize="10px"
+              style={{ fontWeight: "bold" }}
+            >
+              €{d.totalPrice}
+            </text>
+          </g>
+        ))}
+      </svg>
+    )
+  }
+
+  const MostSoldProductsChart = () => {
+    return (
+      <svg width={chartWidth} height={chartHeight}>
+        {soldServices.map((d, i) => (
+          <g key={i}>
+            <text
+              x={5}
+              y={i * (barHeightServices + barPadding) + barHeightServices / 2 + 0}
+              alignmentBaseline="middle"
+              style={{ fontWeight: "bold" }}
+            >
+              <tspan
+                key={d.name}
+                x={5}
+                style={{ whiteSpace: "pre", fontSize: d.name.length > 10 ? "10px" : "9px" }}
+              >
+                {d.name.length > 14 ? `${d.name.slice(0, 12)}...` : d.name}
+              </tspan>
+            </text>
+            <rect
+              x={80}
+              y={i * (barHeightServices + barPadding) + barPadding / 2}
+              width={Math.max(MIN_BAR_WIDTH, (d.totalPrice / maxDataServices) * (chartWidth - 80) + MIN_BAR_WIDTH)}
+              height={barHeightServices}
+              fill="#69b3a2"
+              style={{ minWidth: '40px' }}
+            />
+            <text
+              x={85}
+              y={i * (barHeightServices + barPadding) + barHeightServices / 2 + 0}
+              alignmentBaseline="middle"
+              fill="#FFFFFF"
+              fontSize="10px"
+              style={{ fontWeight: "bold" }}
+            >
+              €{d.totalPrice}
+            </text>
+          </g>
+        ))}
+      </svg>
+    )
+  }
+
   return (
     <div className='bodyDashboard'>
       <Navbar />
@@ -227,12 +254,7 @@ const Dashboard = () => {
                 <h5 id='rankList'>Ranglijst van { capitalize(now) }</h5>
               </div>
               <div className='midBoxCharts d-flex justify-content-center pb-1'>
-                <Plot
-                  data={rankListData}
-                  layout={rankListLayout}
-                  config={config}
-                  style={{ width: "100%", height: "100%" }}
-                  />
+                <RanklistChart/>
               </div>
             </div>
             <div className='bigbox col-5 m-2 rounded-2'>
@@ -269,12 +291,7 @@ const Dashboard = () => {
                     <h5 id='soldServices'>Verkochte diensten in { capitalize(now) }</h5>
                   </div>
                 <div className='midBoxCharts d-flex justify-content-center pb-1'>
-                  <Plot
-                    data={SoldServicesData}
-                    layout={SoldServicesLayout}
-                    config={config}
-                    style={{ width: "100%", height: "100%" }}
-                  />
+                    <MostSoldProductsChart/>
                 </div>
               </div>
             </div>

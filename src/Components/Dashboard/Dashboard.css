@@ -3,6 +3,14 @@
   background-color: #2c475c;
 }
 
+.myButton {
+  opacity: 0;
+}
+
+.myButton:hover {
+  cursor: pointer;
+}
+
 .midbox {
   background-color: #ffffff;
   height: 300px;
@@ -34,11 +42,6 @@
 .current {
   color: rgb(103 148 220);
   font-weight: bold;
-}
-
-.midBoxCharts {
-  position: relative;
-  bottom: 60px;
 }
 
 .biggestBoxChart {
