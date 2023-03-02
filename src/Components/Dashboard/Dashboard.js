@@ -5,6 +5,7 @@ import ReactSpeedometer from "react-d3-speedometer";
 import Plot from 'react-plotly.js';
 import './Dashboard.css'
 import './ChartStyles.css'
+import Logo from './techdogOlogo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -374,8 +375,8 @@ const Dashboard = () => {
         </div>
       :
         <div className='mt-5 d-flex justify-content-center'>
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+          <div className="custom-spinner">
+            <img className=' img-fluid' src={Logo}></img>
           </div>
         </div>
       }

@@ -80,4 +80,17 @@ svg.speedometer {
   top: -30px;
 }
 
+.custom-spinner img {
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* je kan de bar indivudieel en kleur geven door de child te selecteren van de bar*/
