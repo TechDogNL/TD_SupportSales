@@ -34,8 +34,11 @@ const Dashboard = () => {
   const [xYearRankList, setXYearRankList] = useState([]);
   const [yYearRankList, setYYearRankList] = useState([]);
   
-  async function fetchAll(month, year) {
+  async function fetchAll(month, year, reload) {
     try {
+      if (!reload) {
+        setIsLoading(true);
+      }
       const [
         rankListResponse,
         teamTargetResponse,
@@ -97,10 +100,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (cookies.get('token')) {
-      fetchAll(month, year); // First fetch
+      fetchAll(month, year, false); // First fetch
 
       const interval = setInterval(() => { // Fetches every minute
-        fetchAll(month, year);
+        fetchAll(month, year, true);
       }, MINUTE_MS);
 
       return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
