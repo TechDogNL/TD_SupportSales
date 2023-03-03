@@ -34,6 +34,14 @@ const Dashboard = () => {
   const [soldServices, setSoldServices] = useState([]);
   const [xYearRankList, setXYearRankList] = useState([]);
   const [yYearRankList, setYYearRankList] = useState([]);
+
+  function checkIfIntegerAddComma(number) {
+    if (Number.isInteger(number)) {
+      return number.toString().replace('.', ',');
+    } else {
+      return number.toFixed(2).toString().replace('.', ',');
+    }
+  }
   
   async function fetchAll(month, year, reload) {
     try {
@@ -84,7 +92,7 @@ const Dashboard = () => {
       totalPrices = [];
       yearRankListResponse.data.forEach(user => {
         totalPrices.push(user.totalPrice);
-        names.push(`${user.name} <br> € ${user.totalPrice} <br> ${user.date}`);
+        names.push(`${user.name} <br> € ${checkIfIntegerAddComma(user.totalPrice)} <br> ${user.date}`);
       });
       setXYearRankList(names);
       setYYearRankList(totalPrices)
@@ -118,14 +126,6 @@ const Dashboard = () => {
 
   function capitalize(month) {
     return month.charAt(0).toUpperCase() + month.slice(1);
-  }
-
-  function checkIfInteger(number) {
-    if (Number.isInteger(number)) {
-      return number;
-    } else {
-      return number.toFixed(2);
-    }
   }
   
   const config = {
@@ -196,7 +196,7 @@ const Dashboard = () => {
               fontSize="10px"
               style={{ fontWeight: "bold" }}
             >
-              €{d.totalPrice}
+              €{checkIfIntegerAddComma(d.totalPrice)}
             </text>
           </g>
         ))}
@@ -239,7 +239,7 @@ const Dashboard = () => {
               fontSize="10px"
               style={{ fontWeight: "bold" }}
             >
-              €{d.totalPrice}
+              €{checkIfIntegerAddComma(d.totalPrice)}
             </text>
           </g>
         ))}
@@ -268,8 +268,8 @@ const Dashboard = () => {
               </div>
               <div className='speedoMeter d-flex p-4 pt-0 justify-content-evenly'>
                 <div className='d-flex justify-content-center flex-column align-content-between'>
-                  <p className='current '>Bedrag: € {checkIfInteger(amount)}</p>
-                  <p className='toGo'>Te gaan: € {teamTarget.amount ? checkIfInteger(teamTarget.amount - totalPrice) : 0}</p>
+                  <p className='current '>Bedrag: € {checkIfIntegerAddComma(amount)}</p>
+                  <p className='toGo'>Te gaan: € {teamTarget.amount ? checkIfIntegerAddComma(teamTarget.amount - totalPrice) : 0}</p>
                 </div>
                 <div>
                   <ReactSpeedometer
@@ -322,7 +322,7 @@ const Dashboard = () => {
                   <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                   <div>
                     <p className='m-0'>Totaal vorige maand</p>
-                    <h4 className='totalmoney'>€ {checkIfInteger(deals.totalPrice)}</h4>
+                    <h4 className='totalmoney'>€ {checkIfIntegerAddComma(deals.totalPrice)}</h4>
                   </div>
                   <div className='d-flex justify-content-around text-wrap flex-row'>
                     <div>
@@ -331,7 +331,7 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <p className='m-0'>Gem. order</p>
-                      <h5 className='dealsAndGemOrders'>€ {checkIfInteger(deals.averagePrice)}</h5>
+                      <h5 className='dealsAndGemOrders'>€ {checkIfIntegerAddComma(deals.averagePrice)}</h5>
                     </div>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ const Dashboard = () => {
                 <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                   <div>
                     <p className='m-0'>Totaal nieuwe deals</p>
-                    <h4 className='totalmoney'>€ {checkIfInteger(newDeals.totalPrice)}</h4>
+                    <h4 className='totalmoney'>€ {checkIfIntegerAddComma(newDeals.totalPrice)}</h4>
                   </div>
                   <div className='d-flex justify-content-around text-wrap flex-row'>
                     <div>
@@ -349,14 +349,14 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <p className='m-0'>Gem. order</p>
-                      <h5 className='dealsAndGemOrders'>€ {checkIfInteger(newDeals.averagePrice)}</h5>
+                      <h5 className='dealsAndGemOrders'>€ {checkIfIntegerAddComma(newDeals.averagePrice)}</h5>
                     </div>
                   </div>
                 </div>
               <div className='smallboxes col-5 rounded-2 p-2 text-nowrap d-flex text-center flex-column'>
                 <div>
                   <p className='m-0'>Totaal bestaande deals</p>
-                  <h4 className='totalmoney'>€ {checkIfInteger(existantDeals.totalPrice)}</h4>
+                  <h4 className='totalmoney'>€ {checkIfIntegerAddComma(existantDeals.totalPrice)}</h4>
                 </div>
                 <div className='d-flex justify-content-around text-wrap flex-row'>
                   <div>
@@ -365,7 +365,7 @@ const Dashboard = () => {
                   </div>
                   <div>
                     <p className='m-0'>Gem. order</p>
-                    <h5 className='dealsAndGemOrders'>€ {checkIfInteger(existantDeals.averagePrice)}</h5>
+                    <h5 className='dealsAndGemOrders'>€ {checkIfIntegerAddComma(existantDeals.averagePrice)}</h5>
                   </div>
                 </div>
               </div>
